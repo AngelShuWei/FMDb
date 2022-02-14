@@ -96,4 +96,46 @@ router.post('/register', csrfProtection, userValidators,
     }
   }));
 
+  router.get('/login', csrfProtection, (req, res) => {
+    res.render('user-login', {
+      title: 'Login',
+      csrfToken: req.csrfToken(),
+    });
+  });
+
+  const loginValidators = [
+    check('email')
+      .exists({ checkFalsy: true })
+      .withMessage('Please provide a value for Email Address'),
+    check('password')
+      .exists({ checkFalsy: true })
+      .withMessage('Please provide a value for Password'),
+  ];
+
+  router.post('/login', csrfProtection, loginValidators,
+    asyncHandler(async (req, res) => {
+      const {
+        email,
+        password,
+      } = req.body;
+
+      let errors = [];
+      const validatorErrors = validationResult(req);
+
+      if (validatorErrors.isEmpty()) {
+        // TODO Attempt to login the user.
+
+
+      } else {
+        errors = validatorErrors.array().map((error) => error.msg);
+      }
+
+      res.render('user-login', {
+        title: 'Login',
+        email,
+        errors,
+        csrfToken: req.csrfToken(),
+      });
+    }));
+
 module.exports = router;
