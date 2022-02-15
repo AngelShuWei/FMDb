@@ -124,7 +124,7 @@ router.post('/register', csrfProtection, userValidators,
 
       if (validatorErrors.isEmpty()) {
         // TODO Attempt to login the user.
-
+        
 
       } else {
         errors = validatorErrors.array().map((error) => error.msg);
