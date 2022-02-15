@@ -145,8 +145,12 @@ body {
   text-align: center;
 }
 
-div.movie-contents-container {
-  display: block;
+.movie-contents-container {
+  display: flex;
+  flex-direction: column;
+  background-color: red;
+  align-content: center;
+
 }
 
 div.movie-name-year {
