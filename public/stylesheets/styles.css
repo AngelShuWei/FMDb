@@ -140,6 +140,10 @@ body {
   margin-left: 20px;
 }
 
-div.movie-contents-container {
-  display: block;
+.movie-contents-container {
+  display: flex;
+  flex-direction: column;
+  background-color: red;
+  align-content: center;
+
 }
