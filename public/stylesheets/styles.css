@@ -10,6 +10,7 @@
   justify-content: space-between;
   padding: 0.5rem 1rem;
   text-align: center;
+  margin-left: 10px;
 }
 
 
@@ -23,7 +24,7 @@ body {
     display: inline-block;
     padding-top: 0.3125rem;
     padding-bottom: 0.3125rem;
-    margin-right: 1rem;
+    margin-left: 20px;
     font-size: 1.25rem;
     line-height: inherit;
     white-space: nowrap;
@@ -60,17 +61,23 @@ body {
     border-radius: 0.2rem;
 }
 
-.login, .register {
+.login, .register, .cancel {
   color: white;
   font-size: 1.0rem;
 }
 
+#register {
+  color: black;
+  margin-right: 15px;
+}
+
+
 .container {
-    width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 #nav-logo {
@@ -78,5 +85,16 @@ body {
   height: 50px;
   padding: 10px;
   border-radius: 15px;
+}
 
+.registration-form, .py-4 {
+  margin-left: 20px;
+}
+
+.form-label {
+  padding-right: 10px;
+}
+
+.form-group {
+  padding-bottom: 4px;
 }
