@@ -1,0 +1,7 @@
+extends layout.pug
+
+block content
+  p Movie List:
+  ul
+    each movie in movies
+      li= movie.name
