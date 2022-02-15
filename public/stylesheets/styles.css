@@ -17,6 +17,7 @@
 body {
   background-color: black;
   color: rgba(245,197,24);
+  font-family: Roboto,Helvetica,Arial,sans-serif;
 }
 
 .navbar-brand {
@@ -86,7 +87,7 @@ body {
   border-radius: 15px;
 }
 
-.registration-form, .py-4, .login-form {
+.registration-form, .titles, .login-form {
   margin-left: 20px;
 }
 
@@ -98,8 +99,9 @@ body {
   padding-bottom: 4px;
 }
 
-.py-4 {
+.titles {
   color: white;
+  font-size: 48px;
 }
 
 .movie-list {
@@ -114,12 +116,30 @@ body {
   text-align: center;
   font-size: 15px;
   font-weight: bold;
+  margin-left: 20px;
 }
 
 .director {
   font-weight: bold;
+  font-size: 16px;
 }
 
 .movie-description {
- 
+  color: white;
+  font-size: 16px;
+  margin-left: 20px;
+  width: 450px;
+}
+
+#year {
+  color: #FFFFFFB3;
+  margin-left: 20px;
+}
+
+#poster {
+  margin-left: 20px;
+}
+
+div.movie-contents-container {
+  display: block;
 }
