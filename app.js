@@ -48,7 +48,7 @@ store.sync();
 app.use(restoreUser);
 app.use('/', indexRouter);
 app.use('/user', userRouter);
-app.use('/movie', movieRouter);
+app.use('/movies', movieRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
