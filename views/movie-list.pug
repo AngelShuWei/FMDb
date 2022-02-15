@@ -1,7 +1,9 @@
 extends layout.pug
 
 block content
-  p Movie List:
-  ul
+  h1 Movie List:
+  div(class="movie-list")
     each movie in movies
-      li= movie.name
+      div(class="movie")
+        img(src=movie.imageURL, alt=movie.name)
+        p=movie.name
