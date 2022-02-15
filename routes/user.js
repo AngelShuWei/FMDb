@@ -128,7 +128,12 @@ router.post('/register', csrfProtection, userValidators,
 
         if (user !== null) {
           const passwordMatch = await bcrypt.compare(password, user.hashedPassword.toString());
+          if(passwordMatch) {
+            //TODO login the user
+          return res.redirect('/');
+          }
         }
+        errors.push('Login failed for the provided email address and password');
 
       } else {
         errors = validatorErrors.array().map((error) => error.msg);
