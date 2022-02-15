@@ -4,10 +4,11 @@ html
     block head
       meta(charset='utf-8')
       meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
-      link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous')
+      link(rel='stylesheet' href="/stylesheets/styles.css")
       title FMDb - #{title}
   body
     nav(class='navbar navbar-expand-lg navbar-dark bg-primary')
+      img(id='nav-logo' src='/images/logo.png')
       a(class='navbar-brand' href='/') Movies List
       button(class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarText' aria-controls='navbarText' aria-expanded='false' aria-label='Toggle navigation')
         span(class='navbar-toggler-icon')
@@ -19,11 +20,11 @@ html
         if locals.authenticated
           span(class='navbar-text px-4') Welcome #{user.username}!
           form(class='form-inline pr-4' action='/user/logout' method='post')
-            button(class='btn btn-sm btn-warning' type='submit') Logout
+            button(class='btn btn-logout' type='submit') Logout
         else
           span(class='navbar-text px-4')
-            a(class='btn btn-sm btn-dark mr-2' href='/user/login') Login
-            a(class='btn btn-sm btn-dark' href='/user/register') Register
+            a(class='btn login' href='/user/login') Login
+            a(class='btn register' href='/user/register') Register
     .container
       h2(class='py-4') #{title}
       block content
