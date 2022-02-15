@@ -124,7 +124,11 @@ router.post('/register', csrfProtection, userValidators,
 
       if (validatorErrors.isEmpty()) {
         // TODO Attempt to login the user.
-        
+        const user = await db.User.findOne({ where: { email } });
+
+        if (user !== null) {
+          const passwordMatch = await bcrypt.compare(password, user.hashedPassword.toString());
+        }
 
       } else {
         errors = validatorErrors.array().map((error) => error.msg);
