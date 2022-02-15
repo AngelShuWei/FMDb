@@ -28,7 +28,7 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res, next) => {
   const movie = await db.Movie.findByPk(id);
 
   if (movie) {
-    res.render('movie', { title: movie.name });
+    res.render('movie', { title: movie.name, description: movie.description, director: movie.director, releaseYear: movie.releaseYear, imageURL: movie.imageURL });
   } else {
     next(movieNotFoundError(req, res, next));
   }
