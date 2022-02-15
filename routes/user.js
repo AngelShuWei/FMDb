@@ -6,7 +6,7 @@ const db = require('../db/models');
 const { csrfProtection, asyncHandler } = require('./utils');
 
 const router = express.Router();
-const { loginUser } = require('../auth');
+const { loginUser, logoutUser } = require('../auth');
 
 router.get('/register', csrfProtection, (req, res) => {
   const user = db.User.build();
@@ -148,5 +148,10 @@ router.post('/register', csrfProtection, userValidators,
         csrfToken: req.csrfToken(),
       });
     }));
+
+    router.post('/logout', (req, res) => {
+      logoutUser(req, res);
+      res.redirect('/user/login');
+    });
 
 module.exports = router;

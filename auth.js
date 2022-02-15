@@ -1,5 +1,9 @@
 const db = require('./db/models');
 
+const logoutUser = (req, res) => {
+  delete req.session.auth;
+};
+
 const loginUser = (req, res, user) => {
     req.session.auth = {
       userId: user.id,
@@ -35,4 +39,5 @@ const loginUser = (req, res, user) => {
   module.exports = {
     loginUser,
     restoreUser,
+    logoutUser
   };
