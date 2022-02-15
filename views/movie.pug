@@ -1,7 +1,11 @@
 extends layout.pug
 
 block content
-  div
-    movie.name
-    img(src=imageURL, alt=title, height="630px", width="450px")
-    p=description
+  div(class="movie-contents-container")
+    div(class="movie-name-year")
+      movie.name
+      p=releaseYear
+      img(id="poster", src=imageURL, alt=title, height="630px", width="450px")
+    div(class="movie-description")
+      p=description
+      span(class="director") Director: #{director}
