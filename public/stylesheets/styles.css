@@ -102,6 +102,9 @@ body {
 .titles {
   color: white;
   font-size: 48px;
+  margin: 0 auto;
+  text-align: center;
+  padding-bottom: 15px;
 }
 
 .movie-list {
@@ -129,17 +132,23 @@ body {
   font-size: 16px;
   margin-left: 20px;
   width: 450px;
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 15px;
 }
 
 #year {
   color: #FFFFFFB3;
-  margin-left: 20px;
 }
 
 #poster {
-  margin-left: 20px;
+  text-align: center;
 }
 
 div.movie-contents-container {
   display: block;
+}
+
+div.movie-name-year {
+  text-align: center;
 }

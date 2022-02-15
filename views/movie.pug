@@ -7,5 +7,5 @@ block content
       p(id="year")=releaseYear
       img(id="poster", src=imageURL, alt=title, height="630px", width="450px")
     div(class="movie-description")
-      p=description
-      span(class="director") Director: #{director}
+      span(class='description')=description
+      p(class="director") Director: #{director}
