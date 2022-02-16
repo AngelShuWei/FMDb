@@ -20,3 +20,8 @@ npx dotenv sequelize db:migrate:undo:all
 npx sequelize seed:generate --name MoviesSeeds
 
 npx dotenv sequelize db:seed:all
+
+Demo User Credentials-------------
+username: demo_user
+email: demo_user@fmbdDemo.com
+password: Password555!
