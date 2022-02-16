@@ -31,6 +31,14 @@ const collectionValidators = [
 router.get('/add', csrfProtection, (req, res) => {
   // restoreUser(req, res, next);
   const userId = req.session.auth.userId;
+
+  if (!userId) {
+    const error = new Error();
+    error.status = 401;
+    const message = "Please login to create a collection :)"
+    res.render('error', {title: "):", message})
+  }
+
   console.log("userId--------------------", userId);
   const collection = db.Collection.build();
   res.render('add-collection', {
