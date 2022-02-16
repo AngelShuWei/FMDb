@@ -7,9 +7,22 @@ const { check, validationResult } = require('express-validator');
 const router = express.Router();
 const { loginUser, logoutUser, restoreUser } = require('../auth');
 
+const notLoggedInError = (req, res, next) => {
+  const error = Error("Not Logged In");
+  error.status = 404;
+  const message = "Please log in or register to view and create collections :)";
+  res.render('error', { error, message });
+};
 
 router.get('/', asyncHandler(async (req, res, next) => {
-  res.render('collection-list', { title: "My Collections"});
+  if (req.session.auth) {
+    const userId = req.session.auth.userId;
+    const collections = await db.Collection.findAll({where: userId});
+    res.render('collection-list', { title: "My Collections", collections});
+  } else {
+    next(notLoggedInError(req, res, next));
+  };
+
 }));
 
 const collectionValidators = [
@@ -28,26 +41,22 @@ const collectionValidators = [
     }),
 ];
 
-router.get('/add', csrfProtection, (req, res) => {
-  // restoreUser(req, res, next);
-  const userId = req.session.auth.userId;
 
-  if (!userId) {
-    const error = new Error();
-    error.status = 401;
-    const message = "Please login to create a collection :)"
-    res.render('error', {title: "):", message})
-  }
-
-  console.log("userId--------------------", userId);
-  const collection = db.Collection.build();
-  res.render('add-collection', {
-    title: 'Create New Collection',
-    collection,
-    userId,
-    csrfToken: req.csrfToken(),
-  });
-});
+router.get('/add', csrfProtection, asyncHandler( async(req, res, next) => {
+  if (req.session.auth) {
+    const userId = req.session.auth.userId;
+    console.log("userId--------------------", userId);
+    const collection = db.Collection.build();
+    res.render('add-collection', {
+      title: 'Create New Collection',
+      collection,
+      userId,
+      csrfToken: req.csrfToken(),
+    });
+  } else {
+    next(notLoggedInError(req, res, next));
+  };
+}));
 
 router.post('/add', csrfProtection, collectionValidators, asyncHandler(async (req, res) => {
   // const id = req.session.auth.userId;
