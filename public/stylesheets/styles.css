@@ -159,3 +159,39 @@ a {
   color: white;
   text-decoration: none;
 }
+
+a.cancel {
+  padding: 7px;
+}
+
+a.cancel:hover {
+  background-color: rgba(128, 128, 128, 0.376);
+
+}
+
+a.btn.login:hover {
+  background-color: rgba(128, 128, 128, 0.376);
+}
+
+a.btn.register:hover {
+  background-color: rgba(128, 128, 128, 0.376);
+}
+
+a.btn.login {
+  padding: 7px;
+}
+
+a.btn.register {
+  padding: 7px;
+}
+
+.form-group {
+  display: inline-grid;
+  justify-items: center;
+  margin-bottom: 15px;
+}
+
+.registrationForm {
+  display: grid;
+  grid-template-columns: 200px;
+}
