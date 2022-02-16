@@ -152,3 +152,8 @@ div.movie-contents-container {
 div.movie-name-year {
   text-align: center;
 }
+
+a {
+  color: white;
+  text-decoration: none;
+}
