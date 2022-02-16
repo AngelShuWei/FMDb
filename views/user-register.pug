@@ -6,12 +6,12 @@ block content
   +validationErrorSummary(errors)
   form(action='/user/register' method='post' class='registration-form')
     input(type='hidden' name='_csrf' value=csrfToken)
-    +field('Username:', 'username', user.username)
-    +field('Email Address:', 'email', user.email)
-    +field('Password:', 'password', user.hashedPassword, 'password')
-    +field('Confirm Password:', 'confirmPassword', '', 'password')
-    div
+    +field('Username', 'username', user.username)
+    +field('Email Address', 'email', user.email)
+    +field('Password', 'password', user.hashedPassword, 'password')
+    +field('Confirm Password', 'confirmPassword', '', 'password')
+    div(class='registerCancelContainer')
       button(type='submit' class='register' id='register') Register
       a(href='/' class='cancel') Cancel
-    div
-      p: a(href='/user/login' class='login') Already have an account?
+    div(class='alreadyRegisteredContainer')
+      p: a(href='/user/login' class='login' id='loginRedirect') Already registered?

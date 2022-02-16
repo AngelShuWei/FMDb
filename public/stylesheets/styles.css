@@ -90,7 +90,7 @@ body {
 }
 
 .registration-form, .titles, .login-form {
-  margin-left: 20px;
+  /* margin-left: 20px; */
 }
 
 .form-label {
@@ -158,4 +158,88 @@ div.movie-name-year {
 a {
   color: white;
   text-decoration: none;
+}
+
+a.cancel {
+  padding: 7px;
+}
+
+a.cancel:hover {
+  background-color: rgba(128, 128, 128, 0.376);
+
+}
+
+a.btn.login:hover {
+  background-color: rgba(128, 128, 128, 0.376);
+}
+
+a.btn.register:hover {
+  background-color: rgba(128, 128, 128, 0.376);
+}
+
+a.login:hover {
+  background-color: rgba(128, 128, 128, 0.376);
+}
+
+
+a.btn.login {
+  padding: 7px;
+  border-radius: 5px;
+}
+
+a.btn.register {
+  padding: 7px;
+  border-radius: 5px;
+}
+
+a.login {
+  padding: 7px;
+  border-radius: 5px;
+}
+
+a.cancel {
+  padding: 7px;
+  border-radius: 5px;
+  color: white
+}
+
+.form-group {
+  display: inline-grid;
+  justify-items: center;
+  margin-bottom: 15px;
+  margin-top: 5px;
+}
+
+.registerCancelContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.registration-form {
+  display: grid;
+  grid-template-columns: 200px;
+  background-color: rgba(61, 59, 59, 0.685);
+  border-radius: 8px;
+}
+
+.alreadyRegisteredContainer {
+  display: flex;
+  justify-content: center;
+}
+
+#loginRedirect {
+  color: rgba(245,197,24);
+}
+
+button#register.register {
+  background-color: white;
+  border-width: 0px;
+  border-style: none;
+  border-radius: 5px;
+  color: black;
+
+}
+
+.form-control {
+  border-radius: 5px;
 }
