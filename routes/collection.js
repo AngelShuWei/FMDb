@@ -19,9 +19,9 @@ router.get('/', asyncHandler(async (req, res, next) => {
     const userId = req.session.auth.userId;
     console.log("req.session.auth---------------------", req.session.auth);
     console.log("userId---------------------", userId);
-    const collections = await db.Collection.findAll({where: {userId}});
+    const collections = await db.Collection.findAll({ where: { userId } });
     console.log(collections);
-    res.render('collection-list', { title: "My Collections", collections});
+    res.render('collection-list', { title: "My Collections", collections });
   } else {
     next(notLoggedInError(req, res, next));
   };
@@ -45,7 +45,7 @@ const collectionValidators = [
 ];
 
 
-router.get('/add', csrfProtection, asyncHandler( async(req, res, next) => {
+router.get('/add', csrfProtection, asyncHandler(async (req, res, next) => {
   if (req.session.auth) {
     const userId = req.session.auth.userId;
     console.log("userId--------------------", userId);
@@ -67,7 +67,7 @@ router.post('/add', csrfProtection, collectionValidators, asyncHandler(async (re
 
   const { name, userId } = req.body;
 
-  const collection = db.Collection.build({name, userId});
+  const collection = db.Collection.build({ name, userId });
 
   const validatorErrors = validationResult(req);
 
@@ -83,23 +83,52 @@ router.post('/add', csrfProtection, collectionValidators, asyncHandler(async (re
       csrfToken: req.csrfToken(),
     });
   }
-  }));
+})
+);
 
-  router.get('/:id(\\d+)', asyncHandler(async(req, res, next) => {
-    const id = parseInt(req.params.id, 10);
-    // const movies = await db.Collection.findByPk(id);
+router.get('/:id(\\d+)', asyncHandler(async (req, res, next) => {
+  const id = parseInt(req.params.id, 10);
+  // const movies = await db.Collection.findByPk(id);
+  const userId = req.session.auth.userId;
+  const collections = await db.Collection.findAll({ where: { userId } });
+  const collection = await db.Collection.findByPk(id);
+  console.log(collection.name);
+
+  // if (movies) {
+  //   res.render('movie', { title: movie.name, description: movie.description, director: movie.director, releaseYear: movie.releaseYear, imageURL: movie.imageURL, pk: movie.id });
+  // } else {
+  //   next(movieNotFoundError(req, res, next));
+  // }
+}));
+
+router.get('/test', csrfProtection, (req, res) => {
+  const collectionMovie = db.CollectionMovie.build();
+  res.render('add-movie-to-collection', {
+    title: 'Collection Movie',
+    collectionMovie,
+    csrfToken: req.csrfToken(),
+  });
+});
+
+
+router.post('/:id(\\d+)', csrfProtection,
+  asyncHandler(async (req, res) => {
     const userId = req.session.auth.userId;
-    const collections = await db.Collection.findAll({where: {userId}});
+    const collections = await db.Collection.findAll({ where: { userId } });
     const collection = await db.Collection.findByPk(id);
-    console.log(collection.name);
+    
+    const {
+      username,
+      email,
+      password,
+    } = req.body;
 
-    if (movies) {
-      res.render('movie', { title: movie.name, description: movie.description, director: movie.director, releaseYear: movie.releaseYear, imageURL: movie.imageURL, pk: movie.id });
-    } else {
-      next(movieNotFoundError(req, res, next));
-    }
-  }));
-
+    const user = db.User.build({
+      username,
+      email,
+    });
+  })
+);
 
 // const loginUser = (req, res, user) => {
 //   req.session.auth = {

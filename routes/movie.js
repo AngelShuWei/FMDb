@@ -41,7 +41,39 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res, next) => {
   }
 }));
 
+// router.post('/collections/:id(\\d+)', csrfProtection,
+//   asyncHandler(async (req, res) => {
+//     const collectionId = parseInt(req.params.id, 10)
+//     console.log(req.body)
+//     // const {
+//     //   movieId,
+//     //   collectionId,
+//     // } = req.body;
 
+//     const user = db.User.build({
+//       username,
+//       email,
+//     });
+
+//     // const validatorErrors = validationResult(req);
+
+//     // if (validatorErrors.isEmpty()) { //if no errors
+//     //   const hashedPassword = await bcrypt.hash(password, 10);
+//     //   user.hashedPassword = hashedPassword;
+//     //   await user.save();
+//     //   loginUser(req, res, user);
+//     //   res.redirect('/');
+//     // } else {
+//     //   const errors = validatorErrors.array().map((error) => error.msg);
+//     //   res.render('user-register', {
+//     //     title: 'Register',
+//     //     user,
+//     //     errors,
+//     //     csrfToken: req.csrfToken(),
+//     //   });
+//     // }
+//   })
+// );
 
 
 

@@ -1,0 +1,12 @@
+extends layout.pug
+
+include utils.pug
+
+block content
+  +validationErrorSummary(errors)
+  form(action='/collections/:collectionId' method='post')
+    input(type='hidden' name='_csrf' value=csrfToken)
+    +field('MovieId', 'movieId', collectionMovie.movieId)
+    +field('CollectionId', 'collectionId', collectionMovie.collectionId)
+    div(class='registerCancelContainer')
+      button(type='submit' class='register' id='register') Add to Collection

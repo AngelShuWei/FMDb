@@ -10,7 +10,8 @@ block content
       span(class='description')=description
       p(class="director") Director: #{director}
     div(class="add-to-collection")
-      button Add To Collection
-      select(name="add-to-collections")
-        each collection in collections
-          option(value=collection.name)=collection.name 
+      form(action='/collections/:collectionId' method='post')
+        button Add To Collection
+        select(name="add-to-collections")
+          each collection in collections
+            option(value=collection.name)=collection.name
