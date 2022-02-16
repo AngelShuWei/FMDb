@@ -2,4 +2,6 @@ extends layout.pug
 
 block content
   each collection in collections
-    p=collection.name
+    a(href=`http://localhost:8080/collections/${collection.id}`)
+      p=collection.name
+  
