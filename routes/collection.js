@@ -3,8 +3,9 @@ const db = require('../db/models');
 const { csrfProtection, asyncHandler } = require('./utils');
 const { check, validationResult } = require('express-validator');
 
+
 const router = express.Router();
-const { loginUser, logoutUser } = require('../auth');
+const { loginUser, logoutUser, restoreUser } = require('../auth');
 
 
 router.get('/', asyncHandler(async (req, res, next) => {
@@ -28,10 +29,14 @@ const collectionValidators = [
 ];
 
 router.get('/add', csrfProtection, (req, res) => {
+  // restoreUser(req, res, next);
+  const userId = req.session.auth.userId;
+  console.log("userId--------------------", userId);
   const collection = db.Collection.build();
   res.render('add-collection', {
     title: 'Create New Collection',
     collection,
+    userId,
     csrfToken: req.csrfToken(),
   });
 });
@@ -42,9 +47,7 @@ router.post('/add', csrfProtection, collectionValidators, asyncHandler(async (re
 
   const { name, userId } = req.body;
 
-  const collection = db.Collection.build({
-    name
-  });
+  const collection = db.Collection.build({name, userId});
 
   const validatorErrors = validationResult(req);
 

@@ -7,7 +7,7 @@ block content
   form(action='/collections/add' method='post' class='registration-form')
     input(type='hidden' name='_csrf' value=csrfToken)
     +field('Collection Name:', 'name', collection.name)
-    input(type='hidden' name='userId' value=req.session.auth.userId)
+    input(type='hidden' name='userId' value=userId)
     div
       button(type='submit' class='register' id='register') Create Collection
       a(href='/' class='cancel') Cancel
