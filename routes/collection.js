@@ -92,7 +92,14 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res, next) => {
   const userId = req.session.auth.userId;
   const collections = await db.Collection.findAll({ where: { userId } });
   const collection = await db.Collection.findByPk(id);
-  console.log(collection.name);
+  const collectionId = id
+
+  const collectionMovies = await db.CollectionMovie.findAll({ where: {collectionId}})
+
+  console.log(collectionMovies[0].movieId);
+  
+  res.render('collection')
+  // console.log(collection.name);
 
   // if (movies) {
   //   res.render('movie', { title: movie.name, description: movie.description, director: movie.director, releaseYear: movie.releaseYear, imageURL: movie.imageURL, pk: movie.id });
@@ -111,22 +118,25 @@ router.get('/test', csrfProtection, (req, res) => {
 });
 
 
-router.post('/:id(\\d+)', csrfProtection,
+router.post('/3', csrfProtection,
   asyncHandler(async (req, res) => {
     const userId = req.session.auth.userId;
-    const collections = await db.Collection.findAll({ where: { userId } });
-    const collection = await db.Collection.findByPk(id);
-    
+    // const collections = await db.Collection.findAll({ where: { userId } });
+    // const collection = await db.Collection.findByPk(id);
+
     const {
-      username,
-      email,
-      password,
+      movieId,
+      collectionId,
     } = req.body;
 
-    const user = db.User.build({
-      username,
-      email,
+    const collectionMovie = db.CollectionMovie.build({
+      movieId,
+      collectionId
     });
+
+    await collectionMovie.save();
+    res.redirect(`/collections/${collectionId}`)
+
   })
 );
 
