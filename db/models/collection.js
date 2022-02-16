@@ -4,14 +4,16 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING(50),
     userId: DataTypes.INTEGER
   }, {});
+
   Collection.associate = function(models) {
     // associations can be defined here
     const columnMapping = {
       through: 'CollectionMovie',
       otherKey: 'movieId',
       foreignKey: 'collectionId'
-  }
-  Collection.belongsToMany(models.Movie, columnMapping);
+    }
+    Collection.belongsToMany(models.Movie, columnMapping);
+    Collection.belongsTo(models.User, { foreignKey: 'userId' });
   };
   return Collection;
 };
