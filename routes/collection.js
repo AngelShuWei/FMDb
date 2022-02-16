@@ -85,16 +85,16 @@ router.post('/add', csrfProtection, collectionValidators, asyncHandler(async (re
   }
   }));
 
-  router.get('/:id(\\d+)', asyncHandler(async(req, res, next) => {
-    const id = parseInt(req.params.id, 10);
-    const movies = await db.Collection.findByPk(id);
+  // router.get('/:id(\\d+)', asyncHandler(async(req, res, next) => {
+  //   const id = parseInt(req.params.id, 10);
+  //   const movies = await db.Collection.findByPk(id);
 
-    if (movies) {
-      res.render('movie', { title: movie.name, description: movie.description, director: movie.director, releaseYear: movie.releaseYear, imageURL: movie.imageURL, pk: movie.id });
-    } else {
-      next(movieNotFoundError(req, res, next));
-    }
-  }));
+  //   if (movies) {
+  //     res.render('movie', { title: movie.name, description: movie.description, director: movie.director, releaseYear: movie.releaseYear, imageURL: movie.imageURL, pk: movie.id });
+  //   } else {
+  //     next(movieNotFoundError(req, res, next));
+  //   }
+  // }));
 
 
 // const loginUser = (req, res, user) => {

@@ -26,16 +26,22 @@ router.get('/', asyncHandler(async (req, res, next) => {
   res.render('movie-list', { title: 'Movies', movies});
 }));
 
+
 router.get('/:id(\\d+)', asyncHandler(async (req, res, next) => {
   const id = parseInt(req.params.id, 10);
   const movie = await db.Movie.findByPk(id);
+  const userId = req.session.auth.userId;
+  const collections = await db.Collection.findAll({where: {userId}});
+
 
   if (movie) {
-    res.render('movie', { title: movie.name, description: movie.description, director: movie.director, releaseYear: movie.releaseYear, imageURL: movie.imageURL, pk: movie.id });
+    res.render('movie', { title: movie.name, description: movie.description, director: movie.director, releaseYear: movie.releaseYear, imageURL: movie.imageURL, pk: movie.id, collections});
   } else {
     next(movieNotFoundError(req, res, next));
   }
 }));
+
+
 
 
 
