@@ -1,0 +1,12 @@
+extends layout.pug
+
+include utils.pug
+
+block content
+  +validationErrorSummary(errors)
+  form(action='/collections/add' method='post' class='registration-form')
+    input(type='hidden' name='_csrf' value=csrfToken)
+    +field('Collection Name:', 'name', collection.name)
+    div
+      button(type='submit' class='register' id='register') Create Collection
+      a(href='/' class='cancel') Cancel
