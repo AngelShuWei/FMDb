@@ -1,0 +1,11 @@
+extends layout.pug
+
+block content
+  div(class="movie-contents-container")
+    div(class="movie-name-year")
+      movie.name
+      p(id="year")=releaseYear
+      img(id="poster", src=imageURL, alt=title, height="630px", width="450px")
+    div(class="movie-description")
+      span(class='description')=description
+      p(class="director") Director: #{director}

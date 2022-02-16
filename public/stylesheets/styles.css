@@ -17,7 +17,7 @@
 body {
   background-color: black;
   color: rgba(245,197,24);
-  font:
+  font-family: Roboto,Helvetica,Arial,sans-serif;
 }
 
 .navbar-brand {
@@ -72,11 +72,12 @@ body {
 
 
 .container {
-  width: 100%;
+  /* width: 100%; */
   padding-right: 15px;
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
+  width: fit-content;
 }
 
 #nav-logo {
@@ -86,7 +87,7 @@ body {
   border-radius: 15px;
 }
 
-.registration-form, .py-4, .login-form {
+.registration-form, .titles, .login-form {
   margin-left: 20px;
 }
 
@@ -98,6 +99,56 @@ body {
   padding-bottom: 4px;
 }
 
-.py-4 {
+.titles {
   color: white;
+  font-size: 48px;
+  margin: 0 auto;
+  text-align: center;
+  padding-bottom: 15px;
+}
+
+.movie-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 50px;
+  /* margin-left: 50px;
+  margin-right: 50px; */
+}
+
+.movie {
+  text-align: center;
+  font-size: 15px;
+  font-weight: bold;
+  margin-left: 20px;
+}
+
+.director {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.movie-description {
+  color: white;
+  font-size: 16px;
+  margin-left: 20px;
+  width: 450px;
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 15px;
+}
+
+#year {
+  color: #FFFFFFB3;
+}
+
+#poster {
+  text-align: center;
+}
+
+div.movie-contents-container {
+  display: block;
+}
+
+div.movie-name-year {
+  text-align: center;
 }

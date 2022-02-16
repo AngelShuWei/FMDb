@@ -1,0 +1,8 @@
+extends layout.pug
+
+block content
+  div(class="movie-list")
+    each movie in movies
+      div(class="movie")
+        img(src=movie.imageURL, alt=movie.name, height="430px", width="300px")
+        p=movie.name
