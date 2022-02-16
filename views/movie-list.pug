@@ -3,6 +3,8 @@ extends layout.pug
 block content
   div(class="movie-list")
     each movie in movies
-      div(class="movie")
-        img(src=movie.imageURL, alt=movie.name, height="430px", width="300px")
-        p=movie.name
+      div(class="movie" id=movie.id)
+        a(href=`http://localhost:8080/movies/${movie.id}`)
+          img(src=movie.imageURL, alt=movie.name, height="430px", width="300px" id="movie-poster" onclick="http://localhost:8080/movies/2")
+        a(href=`http://localhost:8080/movies/${movie.id}`)
+          p=movie.name
