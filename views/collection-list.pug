@@ -1,3 +1,6 @@
 extends layout.pug
 
-
+block content
+  div
+   each collection in collections
+    p=collection.name
