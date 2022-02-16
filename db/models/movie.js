@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
   Movie.associate = function(models) {
     // associations can be defined here
     const columnMapping = {
-      through: 'Collection',
+      through: 'CollectionMovie',
       otherKey: 'collectionId',
       foreignKey: 'movieId'
   }
