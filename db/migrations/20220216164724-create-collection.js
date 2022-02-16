@@ -12,7 +12,14 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING(50)
       },
-      
+      userId: {
+        allowNull: false,
+        references: {
+          model: 'Users',
+          key: 'id',
+        },
+        type: Sequelize.INTEGER,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

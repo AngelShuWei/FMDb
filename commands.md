@@ -28,4 +28,7 @@ password: Password555!
 
 
 Collections Model--------------
-npx sequelize model:generate --name Collection --attributes name:string
+npx sequelize model:generate --name Collection --attributes name:string,userId:integer
+
+CollectionMovies Model-----------
+npx sequelize model:generate --name CollectionMovie --attributes movieId:integer,collectionId:integer
