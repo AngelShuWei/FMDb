@@ -14,15 +14,12 @@ router.get('/register', csrfProtection, (req, res) => {
     title: 'Register',
     user,
     csrfToken: req.csrfToken(),
+    errors: {},
   });
 });
 
 const userValidators = [
   check('username')
-    .exists({ checkFalsy: true })
-    .withMessage('Please provide a value for Username')
-    .isLength({ max: 20 })
-    .withMessage('First Name must not be more than 20 characters long')
     .custom((value) => {
       return db.User.findOne({ where: { username: value } })
         .then((user) => {
@@ -30,14 +27,12 @@ const userValidators = [
             return Promise.reject('The provided Username is already in use by another account');
           }
         });
-    }),
-  check('email')
+    })
+    .isLength({ max: 20 })
+    .withMessage('First Name must not be more than 20 characters long')
     .exists({ checkFalsy: true })
-    .withMessage('Please provide a value for Email Address')
-    .isLength({ max: 255 })
-    .withMessage('Email Address must not be more than 255 characters long')
-    .isEmail()
-    .withMessage('Email Address is not a valid email')
+    .withMessage('Please provide a value for Username'),
+  check('email')
     .custom((value) => {
       return db.User.findOne({ where: { email: value } })
         .then((user) => {
@@ -45,25 +40,31 @@ const userValidators = [
             return Promise.reject('The provided Email Address is already in use by another account');
           }
         });
-    }),
-  check('password')
-    .exists({ checkFalsy: true })
-    .withMessage('Please provide a value for Password')
-    .isLength({ max: 50 })
-    .withMessage('Password must not be more than 50 characters long')
-    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/, 'g')
-    .withMessage('Password must contain at least 1 lowercase letter, uppercase letter, number, and special character (i.e. "!@#$%^&*")'),
-  check('confirmPassword')
-    .exists({ checkFalsy: true })
-    .withMessage('Please provide a value for Confirm Password')
-    .isLength({ max: 50 })
-    .withMessage('Confirm Password must not be more than 50 characters long')
-    .custom((value, { req }) => {
-      if (value !== req.body.password) {
-        throw new Error('Confirm Password does not match Password');
-      }
-      return true;
     })
+    .isEmail()
+    .withMessage('Email Address is not a valid email')
+    .isLength({ max: 255 })
+    .withMessage('Email Address must not be more than 255 characters long')
+    .exists({ checkFalsy: true })
+    .withMessage('Please provide a value for Email Address'),
+  check('password')
+  .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/, 'g')
+  .withMessage('Password must contain at least 1 lowercase letter, uppercase letter, number, and special character (i.e. "!@#$%^&*")')
+  .isLength({ max: 50 })
+  .withMessage('Password must not be more than 50 characters long')
+  .exists({ checkFalsy: true })
+  .withMessage('Please provide a value for Password'),
+  check('confirmPassword')
+  .custom((value, { req }) => {
+    if (value !== req.body.password) {
+      throw new Error('Confirm Password does not match Password');
+    }
+    return true;
+  })
+  .isLength({ max: 50 })
+  .withMessage('Confirm Password must not be more than 50 characters long')
+  .exists({ checkFalsy: true })
+  .withMessage('Please provide a value for Confirm Password')
 ];
 
 router.post('/register', csrfProtection, userValidators,
@@ -79,7 +80,7 @@ router.post('/register', csrfProtection, userValidators,
       email,
     });
 
-    const validatorErrors = validationResult(req);
+    const validatorErrors = validationResult(req); //validation result take in req and runs it thru middleware. validator errors is an obj
 
     if (validatorErrors.isEmpty()) { //if no errors
       const hashedPassword = await bcrypt.hash(password, 10);
@@ -88,7 +89,12 @@ router.post('/register', csrfProtection, userValidators,
       loginUser(req, res, user);
       res.redirect('/');
     } else {
-      const errors = validatorErrors.array().map((error) => error.msg);
+      // const errors = validatorErrors.array().map((error) => error.msg); //gives an array of all the error messages
+      const errors = {};
+      validatorErrors.array().forEach(err => { //validatorerrors.array() turns it into an array
+        errors[err.param] = err.msg //taking errors obj and adding key of err.param to it with value of err.message. err.param = name of the check that it is currently going thru
+      })
+
       res.render('user-register', {
         title: 'Register',
         user,

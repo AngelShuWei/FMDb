@@ -13,6 +13,11 @@
   margin-left: 10px;
 }
 
+.navbar.navbar-expand-lg.navbar-dark.bg-primary {
+  background-color: #121212;
+  height: 55px;
+  vertical-align: middle;
+}
 
 body {
   background-color: black;
@@ -69,7 +74,6 @@ body {
   color: black;
   margin-right: 15px;
 }
-
 
 .container {
   /* width: 100%; */
