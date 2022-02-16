@@ -8,8 +8,14 @@ block content
     input(type='hidden' name='_csrf' value=csrfToken)
     +field('Email Address:', 'email', email)
     +field('Password:', 'password', null, 'password')
-    div
+    div(id='login')
       button(type='submit' class='login' id='login') Login
-      a(href='/' class='cancel') Cancel
+      a(href='/' class='cancel' id='cancel-login') Cancel
+  form(action='/user/login' method='post' class='login-form')
+    input(type='hidden' name='_csrf' value=csrfToken)
+    input(type='hidden' name='email' value='demo_user@fmbdDemo.com')
+    input(type='hidden' name='password' value='Password555!')
+    div(id='login')
+      button(type='submit' class='login' id='login') Demo Login
     div
       p: a(href='/user/register' class='register') Don't have an account?
