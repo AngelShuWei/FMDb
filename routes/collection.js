@@ -6,6 +6,7 @@ const { check, validationResult } = require('express-validator');
 
 const router = express.Router();
 const { loginUser, logoutUser, restoreUser } = require('../auth');
+const { string } = require('yargs');
 
 const notLoggedInError = (req, res, next) => {
   const error = Error("Not Logged In");
@@ -123,24 +124,49 @@ router.get('/test', csrfProtection, (req, res) => {
 });
 
 
-router.post('/:id(\\d+)', csrfProtection,
-  asyncHandler(async (req, res) => {
+router.post('/add-movie', csrfProtection, asyncHandler(async (req, res) => {
     const userId = req.session.auth.userId;
     // const collections = await db.Collection.findAll({ where: { userId } });
     // const collection = await db.Collection.findByPk(id);
-
     const {
-      movieId,
-      collectionId,
+      addToCollections
     } = req.body;
 
-    const collectionMovie = db.CollectionMovie.build({
-      movieId,
-      collectionId
-    });
+    const body = addToCollections.split('#');
+    const collectionName = body[0];
+    const movieIdStr = body[1];
+    const movieId = parseInt(movieIdStr, 10);
 
-    await collectionMovie.save();
-    res.redirect(`/collections/${collectionId}`)
+    const collectionObj = await db.Collection.findOne({
+      where: {
+        userId,
+        name: collectionName
+       }
+    })
+
+    const collectionId = collectionObj.id;
+
+    const tableExists = await db.CollectionMovie.findOne({
+      where: {
+        movieId,
+        collectionId
+      }
+    })
+
+    if (!tableExists) {
+      const collectionMovie = db.CollectionMovie.build({
+        movieId,
+        collectionId
+      });
+
+      await collectionMovie.save();
+      res.redirect(`/collections/${collectionId}`)
+      // res.redirect('/movies/1')
+    } else {
+      //TO DO
+      //RE RENDER PAGE WITH ERROR BECAUSE JOIN TABLE EXISTS ALREADY
+      res.send('Cannot add same movie into this collection');
+    }
 
   })
 );
