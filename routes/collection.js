@@ -144,7 +144,7 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res, next) => {
 //     collectionMovie,
 //     csrfToken: req.csrfToken(),
 //   });
-// });    //testing join table 
+// });    //testing join table
 
 
 
@@ -186,6 +186,6 @@ router.post('/add-movie', csrfProtection, asyncHandler(async (req, res) => {
 
 })
 );
-
+//
 
 module.exports = router;
