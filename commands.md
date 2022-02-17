@@ -21,6 +21,11 @@ npx sequelize seed:generate --name MoviesSeeds
 
 npx dotenv sequelize db:seed:all
 
+To drop and create db -----------
+npx dotenv sequelize db:drop
+npx dotenv sequelize db:create
+
+
 Demo User Credentials-------------
 username: demo_user
 email: demo_user@fmbdDemo.com
@@ -54,5 +59,3 @@ npx sequelize seed:generate --name CollectionsSeeds
 -------------------------------------------------
 Review Seeder---------------
 npx sequelize seed:generate --name ReviewsSeeds
-
-npx sequelize db:migrate
