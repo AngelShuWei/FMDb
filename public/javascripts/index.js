@@ -1,6 +1,7 @@
 const db = require('../db/models');
 
-window.addEventListener ("load", event => {
+document.addEventListener ("DOMContentLoaded", event => {
+  console.log('hi')
   const collectionButtons = document.querySelectorAll('.collectionId')
 
   for (let i = 0; i < collectionButtons.length; i++) {
@@ -15,8 +16,6 @@ window.addEventListener ("load", event => {
     });
 
   }
-
-
 });
 
 

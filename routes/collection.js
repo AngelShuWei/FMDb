@@ -186,6 +186,13 @@ router.post('/add-movie', csrfProtection, asyncHandler(async (req, res) => {
 
 })
 );
-//
+
+router.delete('/:id', async(req, res) => {
+  const collectionId = req.params.id
+  const collection = await Collection.findByPk(collectionId)
+  await collection.destroy();
+
+  res.json({message: 'Success'})
+})
 
 module.exports = router;
