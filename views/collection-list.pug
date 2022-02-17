@@ -1,0 +1,7 @@
+extends layout.pug
+
+block content
+  each collection in collections
+    a(href=`http://localhost:8080/collections/${collection.id}`)
+      p=collection.name
+  

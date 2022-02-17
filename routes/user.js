@@ -96,7 +96,8 @@ router.post('/register', csrfProtection, userValidators,
         csrfToken: req.csrfToken(),
       });
     }
-  }));
+  })
+);
 
   router.get('/login', csrfProtection, (req, res) => {
     res.render('user-login', {

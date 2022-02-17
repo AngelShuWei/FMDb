@@ -26,16 +26,54 @@ router.get('/', asyncHandler(async (req, res, next) => {
   res.render('movie-list', { title: 'Movies', movies});
 }));
 
-router.get('/:id(\\d+)', asyncHandler(async (req, res, next) => {
+
+router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res, next) => { //need to include csrfProtection here because this get page includes a form and the form needs to have csrf upon initial loading
   const id = parseInt(req.params.id, 10);
   const movie = await db.Movie.findByPk(id);
+  const userId = req.session.auth.userId;
+  const collections = await db.Collection.findAll({ where: {userId} });
+
 
   if (movie) {
-    res.render('movie', { title: movie.name, description: movie.description, director: movie.director, releaseYear: movie.releaseYear, imageURL: movie.imageURL, pk: movie.id });
-  } else {
+    res.render('movie', { title: movie.name, description: movie.description, director: movie.director, releaseYear: movie.releaseYear, imageURL: movie.imageURL, pk: movie.id, collections, csrfToken: req.csrfToken() });
+  } else {    
     next(movieNotFoundError(req, res, next));
   }
 }));
+
+// router.post('/collections/:id(\\d+)', csrfProtection,
+//   asyncHandler(async (req, res) => {
+//     const collectionId = parseInt(req.params.id, 10)
+//     console.log(req.body)
+//     // const {
+//     //   movieId,
+//     //   collectionId,
+//     // } = req.body;
+
+//     const user = db.User.build({
+//       username,
+//       email,
+//     });
+
+//     // const validatorErrors = validationResult(req);
+
+//     // if (validatorErrors.isEmpty()) { //if no errors
+//     //   const hashedPassword = await bcrypt.hash(password, 10);
+//     //   user.hashedPassword = hashedPassword;
+//     //   await user.save();
+//     //   loginUser(req, res, user);
+//     //   res.redirect('/');
+//     // } else {
+//     //   const errors = validatorErrors.array().map((error) => error.msg);
+//     //   res.render('user-register', {
+//     //     title: 'Register',
+//     //     user,
+//     //     errors,
+//     //     csrfToken: req.csrfToken(),
+//     //   });
+//     // }
+//   })
+// );
 
 
 
