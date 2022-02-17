@@ -4,7 +4,11 @@ block content
   each collection in collections
     a(href=`http://localhost:8080/collections/${collection.id}`)
       p=collection.name
-      button(type='button' class='collectionId')
+      button(id=`collectionId=${collection.id}`).collectionId Delete
 
-      "collectionId=1"
-      "collectionId=2"
+      //- "collectionId=1"
+      //- "collectionId=2"
+
+        button(id=post.id).delete-btn Delete
+
+        id=`collectionId=${collection.id}`

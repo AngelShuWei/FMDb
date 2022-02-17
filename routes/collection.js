@@ -18,10 +18,10 @@ const notLoggedInError = (req, res, next) => {
 router.get('/', asyncHandler(async (req, res, next) => {
   if (req.session.auth) {
     const userId = req.session.auth.userId;
-    console.log("req.session.auth---------------------", req.session.auth);
-    console.log("userId---------------------", userId);
+    // console.log("req.session.auth---------------------", req.session.auth);
+    // console.log("userId---------------------", userId);
     const collections = await db.Collection.findAll({ where: { userId } });
-    console.log(collections);
+    // console.log(collections);
     res.render('collection-list', { title: "My Collections", collections });
   } else {
     next(notLoggedInError(req, res, next));
@@ -52,7 +52,7 @@ const collectionValidators = [
 router.get('/add', csrfProtection, asyncHandler(async (req, res, next) => {
   if (req.session.auth) {
     const userId = req.session.auth.userId;
-    console.log("userId--------------------", userId);
+    // console.log("userId--------------------", userId);
     const collection = db.Collection.build();
     res.render('add-collection', {
       title: 'Create New Collection',
