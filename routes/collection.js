@@ -73,8 +73,9 @@ router.post('/add', csrfProtection, collectionValidators, asyncHandler(async (re
 
   const collection = db.Collection.build({ name, userId });
 
-  const validatorErrors = validationResult(req);
+  const validatorErrors = validationResult(req); //collectionvalidator errors gets passed into validation results. req in this case is the reqeust to create a new collection
 
+  //validator erros is an OBJECTTT, you use .array() to make it into an array ( {{},{}} => [{}, {}] ) and then map through the array and access each obj inside it by using the key to get the value. In this case we're trying to get the err.msg or each possible error message.
   const errors = validatorErrors.array().map(error => error.msg); //map through the validation results. Are there errors?
   const collectionExists = await db.Collection.findOne({
     where: {
@@ -87,9 +88,9 @@ router.post('/add', csrfProtection, collectionValidators, asyncHandler(async (re
     errors.push('The Collection name already exists')
   }
 
-  if (!errors.length) { //there is NO length in the errors arary meaning it's GOOOOOOD SHIT
-    await collection.save(); //dont want to save until know that there isn't an error
-    res.redirect('/collections');
+  if (!errors.length) { //there is NO length in the errors arary meaning it's good
+    await collection.save(); //then we want to save the collection
+    res.redirect('/collections'); // then redirect the page
   } else {
     // const errors = validatorErrors.array().map((error) => error.msg);
     // const collectionExists = await db.Collection.findOne({ where: {
@@ -102,7 +103,7 @@ router.post('/add', csrfProtection, collectionValidators, asyncHandler(async (re
     res.render('add-collection', {
       title: 'Create New Collection',
       collection,
-      errors,
+      errors, //feeds the errors in and then it'll display on the pug
       csrfToken: req.csrfToken(),
     });
   }
@@ -147,17 +148,18 @@ router.get('/test', csrfProtection, (req, res) => {
 
 
 router.post('/add-movie', csrfProtection, asyncHandler(async (req, res) => {
-  const userId = req.session.auth.userId;
+  const userId = req.session.auth.userId; //finding out that the user is persisting
 
   const {
     addToCollections
   } = req.body;
+ // req.body will return csrf and value from the submit i.e. 1#2 in an obj. That's why we need to destructure the obj
 
-  const body = addToCollections.split('#');
+  const body = addToCollections.split('#');   //addToCollections is the name of the selection i.e. Romance. It becomes the key to the key value pair
   const collectionIdStr = body[0];
   const movieIdStr = body[1];
-  const collectionId = parseInt(collectionIdStr, 10);
-  const movieId = parseInt(movieIdStr, 10);
+  const collectionId = parseInt(collectionIdStr, 10); //since its wrapped in an interpolated string, when we get it from front end (pug), we have to make it back into an integer.
+  const movieId = parseInt(movieIdStr, 10); //^^same logic as above
 
   const tableExists = await db.CollectionMovie.findOne({
     where: {
@@ -173,8 +175,8 @@ router.post('/add-movie', csrfProtection, asyncHandler(async (req, res) => {
     });
 
     await collectionMovie.save();
-    res.redirect(`/collections/${collectionId}`)
-    // res.redirect('/movies/1')
+    // res.redirect(`/collections/${collectionId}`)
+    res.redirect(`/movies/${movieId}`);
   } else {
     //TO DO
     //RE RENDER PAGE WITH ERROR BECAUSE JOIN TABLE EXISTS ALREADY
