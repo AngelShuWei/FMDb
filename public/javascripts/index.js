@@ -1,22 +1,32 @@
-const db = require('../db/models');
+// const db = require('../db/models');
 
-document.addEventListener ("DOMContentLoaded", event => {
-  console.log('hi')
-  const collectionButtons = document.querySelectorAll('.collectionId')
+// document.addEventListener ("DOMContentLoaded", event => {
+console.log('hi')
+const collectionButtons = document.querySelectorAll('.collectionId')
 
-  for (let i = 0; i < collectionButtons.length; i++) {
-    const collectionButton = collectionButtons[i]
+for (let i = 0; i < collectionButtons.length; i++) {
+  const collectionButton = collectionButtons[i]
 
-    collectionButton.addEventListener("click", async (e) => {
-      e.preventDefault();
-      const id = e.target.id;
-      console.log('COLLECTION ID -----------------', id);
-      // const collection = await db.Collection.findByPk(id);
-      // await collection.destroy();
+  collectionButton.addEventListener("click", async (e) => {
+    e.preventDefault();
+    const id = e.target.id;
+    console.log('COLLECTION ID -----------------', id);
+
+    const res = await fetch(`/collections/${id}`, {
+      method: 'DELETE'
     });
 
-  }
-});
+    let success = await res.json()
+
+    if (success.message === 'Success') {
+      const container = document.querySelector(`#container-${id}`)
+      container.remove();
+    }
+
+  });
+
+}
+// });
 
 
 // const deleteBtns = document.querySelectorAll('.delete-btn')

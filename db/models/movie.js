@@ -12,7 +12,8 @@ module.exports = (sequelize, DataTypes) => {
     const columnMapping = {
       through: 'CollectionMovie',
       otherKey: 'collectionId',
-      foreignKey: 'movieId'
+      foreignKey: 'movieId',
+      onDelete: 'CASCADE'
   }
   Movie.belongsToMany(models.Collection, columnMapping);
   };

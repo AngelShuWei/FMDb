@@ -5,15 +5,19 @@ module.exports = (sequelize, DataTypes) => {
     userId: DataTypes.INTEGER
   }, {});
 
-  Collection.associate = function(models) {
+  Collection.associate = function (models) {
     // associations can be defined here
     const columnMapping = {
       through: 'CollectionMovie',
       otherKey: 'movieId',
-      foreignKey: 'collectionId'
+      foreignKey: 'collectionId',
+      onDelete: 'CASCADE'
     }
     Collection.belongsToMany(models.Movie, columnMapping);
-    Collection.belongsTo(models.User, { foreignKey: 'userId' });
+    Collection.belongsTo(models.User, {
+      foreignKey: 'userId',
+      onDelete: 'CASCADE'
+    });
   };
   return Collection;
 };
