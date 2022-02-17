@@ -126,8 +126,7 @@ router.post('/register', csrfProtection, userValidators,
         const user = await db.User.findOne({ where: { email } });
         loginUser(req, res, user);
         return res.redirect('/');
-
-      }
+      };
 
       let errors = [];
       const validatorErrors = validationResult(req);
