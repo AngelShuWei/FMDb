@@ -123,7 +123,7 @@ router.get('/test', csrfProtection, (req, res) => {
 });
 
 
-router.post('/3', csrfProtection,
+router.post('/:id(\\d+)', csrfProtection,
   asyncHandler(async (req, res) => {
     const userId = req.session.auth.userId;
     // const collections = await db.Collection.findAll({ where: { userId } });
@@ -144,26 +144,6 @@ router.post('/3', csrfProtection,
 
   })
 );
-
-// const loginUser = (req, res, user) => {
-//   req.session.auth = {
-//     userId: user.id,
-//   };
-// };
-
-
-// router.get('/:id(\\d+)', asyncHandler(async (req, res, next) => {
-//   const id = parseInt(req.params.id, 10);
-//   const movie = await db.Movie.findByPk(id);
-
-//   if (movie) {
-//     res.render('movie', { title: movie.name, description: movie.description, director: movie.director, releaseYear: movie.releaseYear, imageURL: movie.imageURL, pk: movie.id });
-//   } else {
-//     next(movieNotFoundError(req, res, next));
-//   }
-// }));
-
-
 
 
 module.exports = router;
