@@ -38,6 +38,8 @@ router.get("/add", csrfProtection, asyncHandler(async (req, res) => {
     };
 }));
 
+router.post("/:id(\\d+)")
+
 
 
 

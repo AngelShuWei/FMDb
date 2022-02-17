@@ -6,6 +6,6 @@ block content
     input(type="hidden" name="_csrf" value=csrfToken)
     input(type="hidden" name="movieId" value=movieId)
     input(type="hidden" name="userId" value=userId)
-    +field("Content", "content", review.content)
+    +field("Content", "content", review.content, type='textarea')
     div(class="registerCancelContainer")
       button(type="submit" class="register" id="registerLog") Add Review
