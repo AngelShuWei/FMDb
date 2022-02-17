@@ -7,14 +7,23 @@ module.exports = (sequelize, DataTypes) => {
     releaseYear: DataTypes.INTEGER,
     imageURL: DataTypes.STRING
   }, {});
-  Movie.associate = function(models) {
+  Movie.associate = function (models) {
     // associations can be defined here
-    const columnMapping = {
+    const columnMappingA = {
       through: 'CollectionMovie',
       otherKey: 'collectionId',
       foreignKey: 'movieId'
-  }
-  Movie.belongsToMany(models.Collection, columnMapping);
+    }
+
+    const columnMappingB = {
+      through: 'Review',
+      otherKey: 'userId',
+      foreignKey: 'movieId'
+    }
+
+    Movie.belongsToMany(models.Collection, columnMappingA);
+    // Movie.hasMany(models.Review, { foreignKey: 'reviewId' });
+    Movie.belongsToMany(models.User, columnMappingB)
   };
   return Movie;
 };

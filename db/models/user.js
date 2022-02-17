@@ -7,7 +7,17 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   User.associate = function(models) {
     // associations can be defined here
+
+    const columnMappingB = {
+      through: 'Review',
+      otherKey: 'movieId',
+      foreignKey: 'userId'
+    }
+
     User.hasMany(models.Collection, { foreignKey: 'userId' });
+    // User.hasMany(models.Review, { foreignKey: 'reviewId' });
+    User.belongsToMany(models.Movie, columnMappingB)
+
   };
   return User;
 };

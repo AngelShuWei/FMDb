@@ -32,3 +32,6 @@ npx sequelize model:generate --name Collection --attributes name:string,userId:i
 
 CollectionMovies Model-----------
 npx sequelize model:generate --name CollectionMovie --attributes movieId:integer,collectionId:integer
+
+Reviews Model--------------
+npx sequelize model:generate --name Review --attributes content:text,rating:integer,userId:integer,movieId:integer
