@@ -4,7 +4,7 @@ include utils.pug
 
 block content
   +validationErrorSummary(errors)
-  form(action='/collections/3' method='post')
+  form(action='/collections/add_to_collection' method='post')
     input(type='hidden' name='_csrf' value=csrfToken)
     +field('MovieId', 'movieId', collectionMovie.movieId)
     +field('CollectionId', 'collectionId', collectionMovie.collectionId)
