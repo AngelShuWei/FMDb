@@ -3,15 +3,15 @@ extends layout.pug
 include utils.pug
 
 block content
-  +validationErrorSummary(errors)
   form(action='/user/register' method='post' class='registration-form')
+    +validationErrorSummary(errors)
     input(type='hidden' name='_csrf' value=csrfToken)
     +field('Username', 'username', user.username)
     +field('Email Address', 'email', user.email)
     +field('Password', 'password', user.hashedPassword, 'password')
     +field('Confirm Password', 'confirmPassword', '', 'password')
     div(class='registerCancelContainer')
-      button(type='submit' class='register' id='register') Register
+      button(type='submit' class='register' id='registerLog') Register
       a(href='/' class='cancel') Cancel
     div(class='alreadyRegisteredContainer')
-      p: a(href='/user/login' class='login' id='loginRedirect') Already registered?
+      p: a(href='/user/login' class='login' id='redirect') Already registered?
