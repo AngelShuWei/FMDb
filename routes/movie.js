@@ -31,7 +31,7 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res, next) => 
   const id = parseInt(req.params.id, 10);
   const movie = await db.Movie.findByPk(id);
   const userId = req.session.auth.userId;
-  const collections = await db.Collection.findAll({where: {userId}});
+  const collections = await db.Collection.findAll({ where: {userId} });
 
 
   if (movie) {
