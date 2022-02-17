@@ -23,7 +23,8 @@ block content
         input(type="hidden" name="_csrf" value=csrfToken)
         input(type="hidden" name="movieId" value=pk)
         input(type="hidden" name="userId" value=userId)
-        +field("Content", "content", review.content, type='textarea')
+        +field("Review", "content", review.content)
+        +field("Rating", "rating", review.rating)
         div(class="registerCancelContainer")
           button(type="submit" class="register" id="registerLog") Add Review
             //- pk is the id of the movie. on line 38, pk movie.id
