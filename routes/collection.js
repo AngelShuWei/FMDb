@@ -137,14 +137,14 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res, next) => {
 
 }));
 
-router.get('/test', csrfProtection, (req, res) => {
-  const collectionMovie = db.CollectionMovie.build();
-  res.render('add-movie-to-collection', {
-    title: 'Collection Movie',
-    collectionMovie,
-    csrfToken: req.csrfToken(),
-  });
-});
+// router.get('/test', csrfProtection, (req, res) => {
+//   const collectionMovie = db.CollectionMovie.build();
+//   res.render('add-movie-to-collection', {
+//     title: 'Collection Movie',
+//     collectionMovie,
+//     csrfToken: req.csrfToken(),
+//   });
+// });    //testing join table 
 
 
 
