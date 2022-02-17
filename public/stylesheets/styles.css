@@ -65,7 +65,7 @@ body {
   font-size: 1.0rem;
 }
 
-#register, #login{
+#register, #login {
   display: inline-block;
   color: black;
   margin-right: 15px;
@@ -87,10 +87,6 @@ body {
   height: 40px;
   padding: 10px;
   border-radius: 15px;
-}
-
-.registration-form, .titles, .login-form {
-  /* margin-left: 20px; */
 }
 
 .form-label {
@@ -208,6 +204,7 @@ a.cancel {
   justify-items: center;
   margin-bottom: 15px;
   margin-top: 5px;
+
 }
 
 .registerCancelContainer {
@@ -217,9 +214,9 @@ a.cancel {
 
 .registration-form {
   display: grid;
-  grid-template-columns: 200px;
+  /* grid-template-columns: 200px; */
   background-color: rgba(61, 59, 59, 0.685);
-  border-radius: 8px;
+  border-radius: 7px;
 }
 
 .alreadyRegisteredContainer {
@@ -227,19 +224,64 @@ a.cancel {
   justify-content: center;
 }
 
-#loginRedirect {
+#redirect {
   color: rgba(245,197,24);
 }
 
-button#register.register {
+#registerLog {
   background-color: white;
   border-width: 0px;
   border-style: none;
   border-radius: 5px;
   color: black;
-
+  font-size: 16px;
 }
 
 .form-control {
   border-radius: 5px;
+}
+
+.loginForm {
+  display: grid;
+  grid-template-columns: 200px;
+  background-color: rgba(61, 59, 59, 0.685);
+  border-radius: 7px;
+  justify-content: center;
+}
+
+.demoButton {
+  height: 30px;
+  width: 125px;
+  background-color: rgb(24, 23, 23);
+  margin: 0px;
+  color: rgba(245,197,24);
+  border: none;
+  border-radius: 7px;
+}
+
+.loginUpper {
+  display: inline-grid;
+  justify-items: center;
+}
+
+#cancel-login {
+  font-size: 16px;
+}
+
+#demoText {
+  font-size: 16px;
+  font-family: Roboto,Helvetica,Arial,sans-serif;
+}
+
+.loginButton {
+  font-family: Roboto,Helvetica,Arial,sans-serif;
+}
+
+#loginCancel {
+  display: flex;
+  justify-content: space-evenly
+}
+
+.alert-danger {
+  width: 500px;
 }

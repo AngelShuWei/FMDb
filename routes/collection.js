@@ -147,6 +147,7 @@ router.get('/test', csrfProtection, (req, res) => {
 });
 
 
+
 router.post('/add-movie', csrfProtection, asyncHandler(async (req, res) => {
   const userId = req.session.auth.userId; //finding out that the user is persisting
 

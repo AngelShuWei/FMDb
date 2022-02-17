@@ -4,18 +4,17 @@ include utils.pug
 
 block content
   +validationErrorSummary(errors)
-  form(action='/user/login' method='post' class='login-form')
-    input(type='hidden' name='_csrf' value=csrfToken)
-    +field('Email Address:', 'email', email)
-    +field('Password:', 'password', null, 'password')
-    div(id='login')
-      button(type='submit' class='login' id='login') Login
-      a(href='/' class='cancel' id='cancel-login') Cancel
-  form(action='/user/login' method='post' class='login-form')
-    input(type='hidden' name='_csrf' value=csrfToken)
-    input(type='hidden' name='email' value='demo_user@fmbdDemo.com')
-    input(type='hidden' name='password' value='Password555!')
-    div(id='login')
-      button(type='submit' class='login' id='login') Demo Login
-    div
-      p: a(href='/user/register' class='register') Don't have an account?
+  div(class="loginForm")
+    form(action='/user/login' method='post' class="form-group")
+      input(type='hidden' name='_csrf' value=csrfToken)
+      +field('Email Address:', 'email', email)
+      +field('Password:', 'password', null, 'password')
+      div(id='loginCancel')
+        button(type='submit' class='loginButton' id='registerLog') Login
+        a(href='/' class='cancel' id='cancel-login') Cancel
+    form(action='/user/login' method='post' class="form-group")
+      input(type='hidden' name='_csrf' value=csrfToken)
+      input(type='hidden' name='email' value='demo_user@fmbdDemo.com')
+      input(type='hidden' name='password' value='Password555!')
+      button(type='submit' class='demoButton' id='demoText') Demo Login
+      p: a(href='/user/register' class='register' id='redirect') Don't have an account?
