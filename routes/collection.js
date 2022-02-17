@@ -96,10 +96,19 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res, next) => {
 
   const collectionMovies = await db.CollectionMovie.findAll({ where: {collectionId}})
 
-  console.log(collectionMovies[0].movieId);
-  
-  res.render('collection')
-  // console.log(collection.name);
+  // console.log(collectionMovies[0].movieId);
+  let movieIds = [];
+  collectionMovies.forEach(movie => {
+    movieIds.push(movie.movieId)
+  })
+
+  movieIds.forEach( id => {
+    const movie = await db.Movie.findByPk(id);
+    const poster = movie.imageURL;
+    const name = movie.name;
+
+    res.render('collection', { movieIds })
+  })
 
   // if (movies) {
   //   res.render('movie', { title: movie.name, description: movie.description, director: movie.director, releaseYear: movie.releaseYear, imageURL: movie.imageURL, pk: movie.id });
