@@ -15,15 +15,15 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'movieId'
     }
 
-    const columnMappingB = {
-      through: 'Review',
-      otherKey: 'userId',
-      foreignKey: 'movieId'
-    }
+    // const columnMappingB = {
+    //   through: 'Review',
+    //   otherKey: 'userId',
+    //   foreignKey: 'movieId'
+    // }
 
     Movie.belongsToMany(models.Collection, columnMappingA);
-    // Movie.hasMany(models.Review, { foreignKey: 'reviewId' });
-    Movie.belongsToMany(models.User, columnMappingB)
+    Movie.hasMany(models.Review, { foreignKey: 'reviewId' });
+    // Movie.belongsToMany(models.User, columnMappingB)
   };
   return Movie;
 };
