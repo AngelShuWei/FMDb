@@ -4,4 +4,7 @@ block content
   each collection in collections
     a(href=`http://localhost:8080/collections/${collection.id}`)
       p=collection.name
-  
+      button(type='button' class='collectionId')
+
+      "collectionId=1"
+      "collectionId=2"
