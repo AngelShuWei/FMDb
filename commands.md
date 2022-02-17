@@ -54,3 +54,5 @@ npx sequelize seed:generate --name CollectionsSeeds
 -------------------------------------------------
 Review Seeder---------------
 npx sequelize seed:generate --name ReviewsSeeds
+
+npx sequelize db:migrate
