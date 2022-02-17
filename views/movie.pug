@@ -10,8 +10,10 @@ block content
       span(class='description')=description
       p(class="director") Director: #{director}
     div(class="add-to-collection")
-      form(action='/collections/:collectionId' method='post')
+      form(action='/collections/add-movie' method='post')
+        input(type='hidden' name='_csrf' value=csrfToken)
+        input(type="hidden" name='movieId' value=pk)
         button Add To Collection
-        select(name="add-to-collections")
+        select(name="collectionId")
           each collection in collections
-            option(value=collection.name)=collection.name
+            option(value=collection.id)=collection.name

@@ -27,7 +27,7 @@ router.get('/', asyncHandler(async (req, res, next) => {
 }));
 
 
-router.get('/:id(\\d+)', asyncHandler(async (req, res, next) => {
+router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res, next) => {
   const id = parseInt(req.params.id, 10);
   const movie = await db.Movie.findByPk(id);
   const userId = req.session.auth.userId;
@@ -35,7 +35,7 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res, next) => {
 
 
   if (movie) {
-    res.render('movie', { title: movie.name, description: movie.description, director: movie.director, releaseYear: movie.releaseYear, imageURL: movie.imageURL, pk: movie.id, collections});
+    res.render('movie', { title: movie.name, description: movie.description, director: movie.director, releaseYear: movie.releaseYear, imageURL: movie.imageURL, pk: movie.id, collections, csrfToken: req.csrfToken(),});
   } else {
     next(movieNotFoundError(req, res, next));
   }

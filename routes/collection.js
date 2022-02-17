@@ -123,7 +123,7 @@ router.get('/test', csrfProtection, (req, res) => {
 });
 
 
-router.post('/:id(\\d+)', csrfProtection,
+router.post('/add-movie', csrfProtection,
   asyncHandler(async (req, res) => {
     const userId = req.session.auth.userId;
     // const collections = await db.Collection.findAll({ where: { userId } });
@@ -133,6 +133,7 @@ router.post('/:id(\\d+)', csrfProtection,
       movieId,
       collectionId,
     } = req.body;
+    // console.log(collectionId)
 
     const collectionMovie = db.CollectionMovie.build({
       movieId,
