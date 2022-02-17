@@ -27,16 +27,16 @@ router.get('/', asyncHandler(async (req, res, next) => {
 }));
 
 
-router.get('/:id(\\d+)', asyncHandler(async (req, res, next) => {
+router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res, next) => { //need to include csrfProtection here because this get page includes a form and the form needs to have csrf upon initial loading
   const id = parseInt(req.params.id, 10);
   const movie = await db.Movie.findByPk(id);
   const userId = req.session.auth.userId;
-  const collections = await db.Collection.findAll({where: {userId}});
+  const collections = await db.Collection.findAll({ where: {userId} });
 
 
   if (movie) {
-    res.render('movie', { title: movie.name, description: movie.description, director: movie.director, releaseYear: movie.releaseYear, imageURL: movie.imageURL, pk: movie.id, collections});
-  } else {
+    res.render('movie', { title: movie.name, description: movie.description, director: movie.director, releaseYear: movie.releaseYear, imageURL: movie.imageURL, pk: movie.id, collections, csrfToken: req.csrfToken() });
+  } else {    
     next(movieNotFoundError(req, res, next));
   }
 }));

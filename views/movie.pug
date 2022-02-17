@@ -1,4 +1,6 @@
 extends layout.pug
+append head
+
 
 block content
   div(class="movie-contents-container")
@@ -10,8 +12,13 @@ block content
       span(class='description')=description
       p(class="director") Director: #{director}
     div(class="add-to-collection")
-      form(action='/collections/:collectionId' method='post')
-        button Add To Collection
-        select(name="add-to-collections")
+      form(action="/collections/add-movie" method="post")
+        input(type="hidden" name="_csrf" value=csrfToken)
+        button(id="btn") Add To Collection
+        select(name="addToCollections")
           each collection in collections
-            option(value=collection.name)=collection.name
+            option(value=`${collection.id}#${pk}`)=collection.name
+
+            //- pk is the id of the movie. on line 38, pk movie.id
+            //- the select is the dropdown and the options are inside the select.
+            //- whatever option you choose from the drop down will become the new select that why select has the collection name i.e. Romance
