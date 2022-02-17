@@ -176,7 +176,7 @@ router.post('/add-movie', csrfProtection, asyncHandler(async (req, res) => {
 
     await collectionMovie.save();
     // res.redirect(`/collections/${collectionId}`)
-    res.redirect(`/movies/${movieId}`);
+    res.redirect(`/movies/${movieId}`); // EITHER THIS REDIRECT PAGE OR THE ONE ABOVE
   } else {
     //TO DO
     //RE RENDER PAGE WITH ERROR BECAUSE JOIN TABLE EXISTS ALREADY
