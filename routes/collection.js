@@ -96,25 +96,21 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res, next) => {
 
   const collectionMovies = await db.CollectionMovie.findAll({ where: {collectionId}})
 
-  // console.log(collectionMovies[0].movieId);
   let movieIds = [];
   collectionMovies.forEach(movie => {
     movieIds.push(movie.movieId)
   })
 
-  movieIds.forEach( id => {
-    const movie = await db.Movie.findByPk(id);
-    const poster = movie.imageURL;
-    const name = movie.name;
+  let movieObjects = [];
 
-    res.render('collection', { movieIds })
-  })
+  for (let i = 0; i < movieIds.length; i++) {
+    let movie = movieIds[i]
+    let movieDetails = await db.Movie.findByPk(movie);
+    movieObjects.push(movieDetails)
+  }
 
-  // if (movies) {
-  //   res.render('movie', { title: movie.name, description: movie.description, director: movie.director, releaseYear: movie.releaseYear, imageURL: movie.imageURL, pk: movie.id });
-  // } else {
-  //   next(movieNotFoundError(req, res, next));
-  // }
+  res.render('collection', { movieObjects })
+
 }));
 
 router.get('/test', csrfProtection, (req, res) => {

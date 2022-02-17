@@ -1,12 +1,10 @@
 extends layout.pug
 
 block content
-  div
-    p=movies
-  //- div(class="movie-list")
-  //-   each movie in movies
-  //-     div(class="movie" id=movie.id)
-  //-       a(href=`http://localhost:8080/movies/${movie.id}`)
-  //-         img(src=movie.imageURL, alt=movie.name, height="430px", width="300px" id="movie-poster" onclick="http://localhost:8080/movies/2")
-  //-       a(href=`http://localhost:8080/movies/${movie.id}`)
-  //-         p=movie.name
+  div(class="movie-list")
+    each movieObject in movieObjects
+      div(class="movie" id=movieObject.id)
+        a(href=`http://localhost:8080/movies/${movieObject.id}`)
+          img(src=movieObject.imageURL, alt=movieObject.name, height="430px", width="300px" id="movie-poster" )
+        a(href=`http://localhost:8080/movies/${movieObject.id}`)
+          p=movieObject.name
