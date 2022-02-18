@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     hashedPassword: DataTypes.STRING.BINARY,
     email: DataTypes.STRING(255)
   }, {});
-  User.associate = function(models) {
+  User.associate = function (models) {
     // associations can be defined here
 
     const columnMappingB = {
@@ -17,7 +17,6 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.Collection, { foreignKey: 'userId' });
     // User.hasMany(models.Review, { foreignKey: 'reviewId' });
     User.belongsToMany(models.Movie, columnMappingB)
-
   };
   return User;
 };

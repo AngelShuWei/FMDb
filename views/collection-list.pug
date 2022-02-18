@@ -1,7 +1,31 @@
 extends layout.pug
 
 block content
+  script(src="/javascripts/index.js" type="module")
   each collection in collections
-    a(href=`http://localhost:8080/collections/${collection.id}`)
-      p=collection.name
-  
+    div(id=`container-${collection.id}`)
+      a(href=`http://localhost:8080/collections/${collection.id}`)
+        p=collection.name
+          button(id=collection.id).collectionId Delete
+
+      //- "collectionId=1"
+      //- "collectionId=2"
+
+        button(id=post.id).delete-btn Delete
+
+        id=`collectionId=${collection.id}`
+
+    //- each post in posts
+    //-     div(id=`post-container-${post.id}`).post-box
+    //-         p= post.content
+    //-         if post.userId === userId
+    //-             form(action=`/posts/${post.id}/delete` method="post")
+    //-                 input(type="hidden" name="_csrf" value=csrfToken)
+    //-                 button(id=post.id).delete-btn Delete
+
+
+//- block content
+//-   each collection in collections
+//-     a(href=`http://localhost:8080/collections/${collection.id}`)
+//-       p=collection.name
+//-         button(id=`collectionId=${collection.id}`).collectionId Delete
