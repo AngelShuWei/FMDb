@@ -1,0 +1,10 @@
+extends layout.pug
+
+include utils.pug
+
+block content
+    div Edit your review
+        form(action=`/reviews/${reviewId}/edit` method='POST')
+            input(type='hidden' name='_csrf' value=csrfToken)
+            input(type='text' name='name' value=collectionName)
+            button(type='submit' class='edit-btn') Submit
