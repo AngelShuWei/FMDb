@@ -1,4 +1,4 @@
-.navbar {
+.navbar-container {
   position: relative;
   display: -ms-flexbox;
   display: flex;
@@ -10,7 +10,7 @@
   justify-content: space-between;
   padding: 0.5rem 1rem;
   text-align: center;
-  margin-left: 10px;
+  background-color: #121212;
 }
 
 .indiv-review {
@@ -27,7 +27,7 @@ body {
   font-family: Roboto,Helvetica,Arial,sans-serif;
 }
 
-.navbar-brand {
+.navbar-button {
   display: inline-block;
   padding-top: 0.3125rem;
   padding-bottom: 0.3125rem;
@@ -39,7 +39,8 @@ body {
 }
 
 .navbar-text {
-  display: inline-block;
+  display: flex;
+  justify-content: flex-end;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   padding-right: 2rem;
@@ -52,10 +53,15 @@ body {
   flex-grow: 1;
 }
 
-.navbar-expand-lg .navbar-collapse {
+#navbarText {
+  display: flex;
+  justify-content: center;
+}
+
+/* .navbar-expand-lg .navbar-collapse {
   display: flex;
   flex-basis: auto;
-}
+} */
 .mr-auto {
   margin-right: auto;
 }
