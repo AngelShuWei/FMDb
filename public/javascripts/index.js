@@ -1,7 +1,3 @@
-
-// const db = require('../db/models');
-
-// document.addEventListener ("DOMContentLoaded", event => {
 console.log('hi')
 const collectionButtons = document.querySelectorAll('.collectionId')
 
@@ -27,7 +23,44 @@ for (let i = 0; i < collectionButtons.length; i++) {
   });
 
 }
-// });
+
+
+
+
+const reviewButtons = document.querySelectorAll('.reviewBtn')
+
+for (let i = 0; i < reviewButtons.length; i++) {
+  const reviewButton = reviewButtons[i]
+
+  reviewButton.addEventListener("click", async (e) => {
+    e.preventDefault();
+    const reviewString = e.target.id; //review1
+    console.log('review string -----------------', reviewString);
+
+    const stringId = reviewString.split('-');
+    console.log('stringId-----------------', stringId);
+
+    const stringId2 = stringId[1]
+
+    const id = parseInt(stringId2, 10);
+
+    console.log('review ID -----------------', id);
+
+    const res = await fetch(`/reviews/${id}`, {
+      method: 'DELETE'
+    });
+
+    let success = await res.json()
+
+    if (success.message === 'Success') {
+      const container = document.querySelector(`#indiv-review-${id}`)
+      container.remove();
+    }
+
+  });
+
+}
+
 
 
 // const deleteBtns = document.querySelectorAll('.delete-btn')
@@ -55,4 +88,3 @@ for (let i = 0; i < collectionButtons.length; i++) {
 //     }
 //   })
 // // }
-
