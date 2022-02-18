@@ -2,7 +2,8 @@ extends layout.pug
 
 block content
     div(class='reviews')
-        each review in reviews
+        each reviewAndMovie in reviewsAndMovies
             div(class='registration-form')
-                p(=review.movieId) Movie Id
-                p=review.content
+                a(href=`http://localhost:8080/movies/${reviewAndMovie[1].id}`).movie
+                    div Movie: #{reviewAndMovie[1].name}
+                div Your Review: #{reviewAndMovie[0].content}

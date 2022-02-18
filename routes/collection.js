@@ -133,7 +133,7 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res, next) => {
     movieObjects.push(movieDetails)
   }
 
-  res.render('collection', { movieObjects })
+  res.render('collection', { title: `Collection: ${collection.name}`,movieObjects })
 
 }));
 

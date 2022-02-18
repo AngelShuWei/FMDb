@@ -16,11 +16,20 @@ const logIntoReviewError = (req, res, next) => {
 
 
 router.get('/', csrfProtection, asyncHandler( async (req, res) => {
-    const id = parseInt(req.params.id, 10);
+    // const id = parseInt(req.params.id, 10);
     const userId = req.session.auth.userId;
     const reviews = await db.Review.findAll({ where: { userId } });
 
-    res.render('review-list', { title: "My Reviews", reviews })
+    const reviewsAndMovies = [];
+
+    for (let i = 0; i < reviews.length; i++) {
+        let review = reviews[i];
+        let movieId = review.movieId;
+        const movie = await db.Movie.findByPk(movieId);
+        reviewsAndMovies.push([review, movie]);
+    }
+
+    res.render('review-list', { title: "My Reviews", reviewsAndMovies })
 }));
 
 router.get("/add", csrfProtection, asyncHandler(async (req, res) => {
