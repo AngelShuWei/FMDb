@@ -26,7 +26,7 @@ block content
         input(type="hidden" name="movieId" value=pk)
         input(type="hidden" name="userId" value=userId)
         +field("Review", "content", review.content)
-        +field("Rating", "rating", review.rating, type='number')
+        +field("Rating", "rating", review.rating, type='number', max='5')
         div(class="registerCancelContainer")
           button(type="submit" class="register" id="registerLog") Add Review
             //- pk is the id of the movie. on line 38, pk movie.id

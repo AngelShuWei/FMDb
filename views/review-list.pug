@@ -2,4 +2,7 @@ extends layout.pug
 
 block content
     div(class='reviews')
-        p=reviews
+        each review in reviews
+            div(class='registration-form')
+                p(=review.movieId) Movie Id
+                p=review.content
