@@ -104,6 +104,21 @@ router.post('/add', csrfProtection, reviewValidators, asyncHandler(async (req, r
 })
 );
 
+router.get('/:id', async(req, res) => {
+    const reviewId = req.params.id;
+    const review = await db.Review.findByPk(reviewId);
+
+    res.render('review', {review})
+});
+
+router.delete('/:id', async (req, res) => {
+    const reviewId = req.params.id
+    const review = await db.Review.findByPk(reviewId)
+    await review.destroy();
+
+    res.json({ message: 'Success' })
+});
+
 
 
 
