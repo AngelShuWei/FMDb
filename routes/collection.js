@@ -230,23 +230,20 @@ router.put('/:id/edit', csrfProtection, asyncHandler( async(req, res, next) => {
   if (req.session.auth) {
     const collectionId = parseInt(req.params.id, 10)
     const collection = await db.Collection.findByPk(collectionId)
-
+    const { name } = req.body;
+    collection.name = name
+    await collection.save;
     // const userId = req.session.auth.userId;
 
-    const collectionName = collection.name
     // console.log("userId--------------------", userId);
     // const collection = db.Collection.build();
 
-    res.render('collection-edit-form', {
-      title: 'Edit An Existing Collection',
-      collectionName,
-      csrfToken: req.csrfToken(),
-    });
+    res.redirect('/collections');
 
   } else {
-
     next(notLoggedInError(req, res, next));
   }
+
 }));
 
 module.exports = router;
