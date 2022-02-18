@@ -200,4 +200,53 @@ router.delete('/:id', async(req, res) => {
   res.json({ message: 'Success' })
 })
 
+router.get('/:id/edit', csrfProtection, asyncHandler(async (req, res, next) => {
+  if (req.session.auth) {
+    console.log(req.params)
+    const collectionId = parseInt(req.params.id, 10)
+    const collection = await db.Collection.findByPk(collectionId)
+
+    // const userId = req.session.auth.userId;
+
+    const collectionName = collection.name
+    // console.log("userId--------------------", userId);
+    // const collection = db.Collection.build();
+
+    res.render('collection-edit-form', {
+      title: 'Edit An Existing Collection',
+      collectionName,
+      csrfToken: req.csrfToken(),
+    });
+
+  } else {
+
+    next(notLoggedInError(req, res, next));
+  };
+
+}));
+
+
+router.put('/:id/edit', csrfProtection, asyncHandler( async(req, res, next) => {
+  if (req.session.auth) {
+    const collectionId = parseInt(req.params.id, 10)
+    const collection = await db.Collection.findByPk(collectionId)
+
+    // const userId = req.session.auth.userId;
+
+    const collectionName = collection.name
+    // console.log("userId--------------------", userId);
+    // const collection = db.Collection.build();
+
+    res.render('collection-edit-form', {
+      title: 'Edit An Existing Collection',
+      collectionName,
+      csrfToken: req.csrfToken(),
+    });
+
+  } else {
+
+    next(notLoggedInError(req, res, next));
+  }
+}));
+
 module.exports = router;
