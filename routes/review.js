@@ -127,14 +127,20 @@ router.get('/:id(\\d+)/edit', csrfProtection, asyncHandler(async (req, res, next
 
       // const userId = req.session.auth.userId;
 
-      const reviewName = review.name
+      const reviewContent = review.content;
+      const reviewRating = review.rating;
+      const userId = review.userId;
+      const pk = review.movieId;
+
       // console.log("userId--------------------", userId);
       // const collection = db.Collection.build();
 
       res.render('review-edit-form', {
         title: 'Edit An Existing Review',
-        reviewId,
-        reviewName,
+        reviewContent,
+        reviewRating,
+        userId,
+        pk,
         csrfToken: req.csrfToken(),
       });
 
