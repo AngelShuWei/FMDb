@@ -1,10 +1,13 @@
 extends layout.pug
 
 block content
-    div(class='reviews')
-        each reviewAndMovie in reviewsAndMovies
-            div(class='registration-form indiv-review')
-                a(href=`http://localhost:8080/movies/${reviewAndMovie[1].id}`).movie-in-review
-                    div Movie: #{reviewAndMovie[1].name}
-                div Your Review: #{reviewAndMovie[0].content}
-                button(id='review-btn').reviewId Delete
+    script(src="/javascripts/index.js" type="module")
+    each reviewAndMovie in reviewsAndMovies
+        div(id=`indiv-review-${reviewAndMovie[0].id}` class=`registration-form indiv-review-${reviewAndMovie[0].id}`)
+            a(href=`http://localhost:8080/movies/${reviewAndMovie[1].id}`).movie-in-review
+                div Movie: #{reviewAndMovie[1].name}
+            div Your Review: #{reviewAndMovie[0].content}
+            div
+                button(id=`review${reviewAndMovie[0].id}`).reviewBtn Delete
+
+    //- div(class='reviews')
