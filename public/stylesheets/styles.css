@@ -305,3 +305,33 @@ a.cancel {
 .alert-danger {
   width: 500px;
 }
+
+.collectionContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.nameContainer {
+  width: 70px;
+}
+
+#btnContainer {
+  padding-left: 15px;
+}
+/* .collectionContainer > * {
+  padding-left: 15px;
+} */
+
+div.create-collection {
+  display: flex;
+  width: 180px;
+  justify-content: center;
+  padding: 7px;
+  border-radius: 5px;
+  border: 20px rgba(245,197,24);
+}
+
+div.create-collection:hover {
+  background-color: rgba(128, 128, 128, 0.376);
+}
