@@ -1,3 +1,4 @@
+
 // const db = require('../db/models');
 
 // document.addEventListener ("DOMContentLoaded", event => {
@@ -54,3 +55,4 @@ for (let i = 0; i < collectionButtons.length; i++) {
 //     }
 //   })
 // // }
+
