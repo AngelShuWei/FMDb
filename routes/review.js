@@ -112,9 +112,9 @@ router.get('/:id', async(req, res) => {
 });
 
 router.delete('/:id', async (req, res) => {
-    const collectionId = req.params.id
-    const collection = await db.Collection.findByPk(collectionId)
-    await collection.destroy();
+    const reviewId = req.params.id
+    const review = await db.Review.findByPk(reviewId)
+    await review.destroy();
 
     res.json({ message: 'Success' })
 });

@@ -27,39 +27,39 @@ for (let i = 0; i < collectionButtons.length; i++) {
 
 
 
-// const reviewButtons = document.querySelectorAll('.reviewBtn')
+const reviewButtons = document.querySelectorAll('.reviewBtn')
 
-// for (let i = 0; i < reviewButtons.length; i++) {
-//   const reviewButton = reviewButtons[i]
+for (let i = 0; i < reviewButtons.length; i++) {
+  const reviewButton = reviewButtons[i]
 
-//   reviewButton.addEventListener("click", async (e) => {
-//     e.preventDefault();
-//     const reviewString = e.target.id; //review1
-//     console.log('review string -----------------', reviewString);
+  reviewButton.addEventListener("click", async (e) => {
+    e.preventDefault();
+    const reviewString = e.target.id; //review1
+    console.log('review string -----------------', reviewString);
 
-//     const stringId = reviewString.split('');
-//     console.log('stringId-----------------', stringId);
+    const stringId = reviewString.split('-');
+    console.log('stringId-----------------', stringId);
 
-//     const stringId2 = stringId[stringId.length - 1]
+    const stringId2 = stringId[1]
 
-//     const id = parseInt(stringId2, 10);
+    const id = parseInt(stringId2, 10);
 
-//     console.log('review ID -----------------', id);
+    console.log('review ID -----------------', id);
 
-//     const res = await fetch(`/reviews/${id}`, {
-//       method: 'DELETE'
-//     });
+    const res = await fetch(`/reviews/${id}`, {
+      method: 'DELETE'
+    });
 
-//     let success = await res.json()
+    let success = await res.json()
 
-//     if (success.message === 'Success') {
-//       const container = document.querySelector(`#indiv-review-${id}`)
-//       container.remove();
-//     }
+    if (success.message === 'Success') {
+      const container = document.querySelector(`#indiv-review-${id}`)
+      container.remove();
+    }
 
-//   });
+  });
 
-// }
+}
 
 
 
