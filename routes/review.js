@@ -139,6 +139,7 @@ router.get('/:id(\\d+)/edit', csrfProtection, asyncHandler(async (req, res, next
         title: 'Edit An Existing Review',
         reviewContent,
         reviewRating,
+        reviewId,
         userId,
         pk,
         csrfToken: req.csrfToken(),
@@ -156,13 +157,15 @@ router.post('/:id/edit', csrfProtection, asyncHandler( async(req, res, next) => 
     // console.log("req.params!!!!________________,", req.params)
 
     if (req.session.auth) {
-      // console.log("req.params!!!!________________,", req.params)
-      const collectionId = parseInt(req.params.id, 10)
-      // console.log("COLLECTION ID here-------!!!!!!!!!!!!!!!!!!!!!!!!", collectionId);
-      const collection = await db.Collection.findByPk(collectionId)
-      const { name } = req.body;
-      collection.name = name
-      await collection.save();
+      console.log("req.params!!!!________________,", req.params)
+      const reviewId = parseInt(req.params.id, 10)
+      console.log("REVIEW ID here-------!!!!!!!!!!!!!!!!!!!!!!!!", reviewId);
+      const review = await db.Review.findByPk(reviewId)
+      const { content, rating } = req.body;
+      review.content = content;
+      review.rating = rating;
+
+      await review.save();
 
       // await pet.update({
       //   name: "Fido, Sr."
@@ -173,7 +176,7 @@ router.post('/:id/edit', csrfProtection, asyncHandler( async(req, res, next) => 
       // console.log("userId--------------------", userId);
       // const collection = db.Collection.build();
 
-      res.redirect('/collections');
+      res.redirect('/reviews');
 
     } else {
       next(notLoggedInError(req, res, next));
