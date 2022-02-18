@@ -200,9 +200,11 @@ router.delete('/:id', async(req, res) => {
   res.json({ message: 'Success' })
 })
 
-router.get('/:id/edit', csrfProtection, asyncHandler(async (req, res, next) => {
+// '/:id(\\d+)'
+
+router.get('/:id(\\d+)/edit', csrfProtection, asyncHandler(async (req, res, next) => {
   if (req.session.auth) {
-    console.log(req.params)
+    console.log("req.params!!!!________________,", req.params)
     const collectionId = parseInt(req.params.id, 10)
     const collection = await db.Collection.findByPk(collectionId)
 
@@ -214,6 +216,7 @@ router.get('/:id/edit', csrfProtection, asyncHandler(async (req, res, next) => {
 
     res.render('collection-edit-form', {
       title: 'Edit An Existing Collection',
+      collectionId,
       collectionName,
       csrfToken: req.csrfToken(),
     });
@@ -226,13 +229,23 @@ router.get('/:id/edit', csrfProtection, asyncHandler(async (req, res, next) => {
 }));
 
 
-router.put('/:id/edit', csrfProtection, asyncHandler( async(req, res, next) => {
+router.post('/:id/edit', csrfProtection, asyncHandler( async(req, res, next) => {
+  // console.log('NOW IN THE PUT ROUTER');
+  // console.log("req.params!!!!________________,", req.params)
+
   if (req.session.auth) {
+    // console.log("req.params!!!!________________,", req.params)
     const collectionId = parseInt(req.params.id, 10)
+    // console.log("COLLECTION ID here-------!!!!!!!!!!!!!!!!!!!!!!!!", collectionId);
     const collection = await db.Collection.findByPk(collectionId)
     const { name } = req.body;
     collection.name = name
-    await collection.save;
+    await collection.save();
+
+    // await pet.update({
+    //   name: "Fido, Sr."
+    // });
+
     // const userId = req.session.auth.userId;
 
     // console.log("userId--------------------", userId);

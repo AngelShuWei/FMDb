@@ -6,6 +6,8 @@ block content
     a(href=`http://localhost:8080/collections/add`) Create New Collection
   each collection in collections
     div(id=`container-${collection.id}`)
+      a(href=`http://localhost:8080/collections/${collection.id}/edit`)
+          button(class='editBtn') Edit
       a(href=`http://localhost:8080/collections/${collection.id}`)
         p=collection.name
           button(id=collection.id).collectionId Delete

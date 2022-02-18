@@ -4,7 +4,7 @@ include utils.pug
 
 block content
     div Rename your collection below
-        form(action='/collections/:id/edit' method='put')
+        form(action=`/collections/${collectionId}/edit` method='POST')
             input(type='hidden' name='_csrf' value=csrfToken)
-            input(type='text' value=collectionName)
+            input(type='text' name='name' value=collectionName)
             button(type='submit' class='edit-btn') Submit
