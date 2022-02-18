@@ -9,8 +9,8 @@ const seedReviews = num => {
     let i = 0;
     while (i < num) {
         const review = {
-            content: faker.lorem.paragraph(),
-            rating: randomRating(1, 5)
+            movieId: randomRating(1, 20),
+            collectionId: randomRating(1, 3),
         }
 
         console.log(review, ',')
