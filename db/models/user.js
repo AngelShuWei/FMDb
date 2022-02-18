@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     //   otherKey: 'movieId',
     //   foreignKey: 'userId',
     // }
-
+ 
     User.hasMany(models.Collection, {
     foreignKey: 'userId',
     onDelete: 'CASCADE'
