@@ -5,9 +5,12 @@ module.exports = (sequelize, DataTypes) => {
     hashedPassword: DataTypes.STRING.BINARY,
     email: DataTypes.STRING(255)
   }, {});
-  User.associate = function(models) {
+  User.associate = function (models) {
     // associations can be defined here
-    User.hasMany(models.Collection, { foreignKey: 'userId' });
+    User.hasMany(models.Collection, {
+      foreignKey: 'userId',
+      onDelete: 'CASCADE'
+    });
   };
   return User;
 };
