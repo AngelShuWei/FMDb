@@ -13,6 +13,13 @@
   margin-left: 10px;
 }
 
+.indiv-review {
+  margin-bottom: 25px;
+}
+
+.movie-in-review {
+  text-decoration: underline;
+}
 
 body {
   background-color: black;
