@@ -1,11 +1,11 @@
-extends layout.pug
-include utils.pug
-block content
-  form(action="/reviews/add" method="post" class="registration-form")
-    +validationErrorSummary(errors)
-    input(type="hidden" name="_csrf" value=csrfToken)
-    input(type="hidden" name="movieId" value=movieId)
-    input(type="hidden" name="userId" value=userId)
-    +field("Content", "content", review.content, type='textarea')
-    div(class="registerCancelContainer")
-      button(type="submit" class="register" id="registerLog") Add Review
+//- extends layout.pug
+//- include utils.pug
+//- block content
+//-   form(action="/reviews/add" method="post" class="registration-form")
+//-     +validationErrorSummary(errors)
+//-     input(type="hidden" name="_csrf" value=csrfToken)
+//-     input(type="hidden" name="movieId" value=movieId)
+//-     input(type="hidden" name="userId" value=userId)
+//-     +field("Content", "content", review.content, type='textarea')
+//-     div(class="registerCancelContainer")
+//-       button(type="submit" class="register" id="registerLog") Add Review
