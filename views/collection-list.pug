@@ -2,6 +2,8 @@ extends layout.pug
 
 block content
   script(src="/javascripts/index.js" type="module")
+  div(class="create-collection")
+    a(href=`http://localhost:8080/collections/add`) Create New Collection
   each collection in collections
     div(id=`container-${collection.id}`)
       a(href=`http://localhost:8080/collections/${collection.id}`)
