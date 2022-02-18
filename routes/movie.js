@@ -33,10 +33,11 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res, next) => 
   const userId = req.session.auth.userId;
   const collections = await db.Collection.findAll({ where: {userId} });
 
+  const review = db.Review.build();
 
   if (movie) {
-    res.render('movie', { title: movie.name, description: movie.description, director: movie.director, releaseYear: movie.releaseYear, imageURL: movie.imageURL, pk: movie.id, collections, csrfToken: req.csrfToken() });
-  } else {    
+    res.render('movie', { title: movie.name, review, userId, description: movie.description, director: movie.director, releaseYear: movie.releaseYear, imageURL: movie.imageURL, pk: movie.id, collections, csrfToken: req.csrfToken() });
+  } else {
     next(movieNotFoundError(req, res, next));
   }
 }));

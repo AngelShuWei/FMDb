@@ -1,4 +1,5 @@
 extends layout.pug
+include utils.pug
 append head
 
 
@@ -18,7 +19,31 @@ block content
         select(name="addToCollections")
           each collection in collections
             option(value=`${collection.id}#${pk}`)=collection.name
-
+    div(class='add-review')
+      form(action="/reviews/add" method="post" class="registration-form")
+        +validationErrorSummary(errors)
+        input(type="hidden" name="_csrf" value=csrfToken)
+        input(type="hidden" name="movieId" value=pk)
+        input(type="hidden" name="userId" value=userId)
+        +field("Review", "content", review.content)
+        +field("Rating", "rating", review.rating, type='number', max='5')
+        div(class="registerCancelContainer")
+          button(type="submit" class="register" id="registerLog") Add Review
             //- pk is the id of the movie. on line 38, pk movie.id
             //- the select is the dropdown and the options are inside the select.
             //- whatever option you choose from the drop down will become the new select that why select has the collection name i.e. Romance
+
+
+        //- input(type="text" name="Review", value=review.content)
+        //- input(type="text" name="Rating", value=review.rating)
+
+    //-  +field("Review", "content", review.content)
+    //-     +field("Rating", "rating", review.rating)
+
+
+    //- select(name="addToCollections")
+    //-       option(value=1)="1"
+    //-       option(value=2)="2"
+    //-       option(value=3)="3"
+    //-       option(value=4)="4"
+    //-       option(value=5)="5"
