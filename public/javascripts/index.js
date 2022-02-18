@@ -2,18 +2,17 @@
 // const db = require('../db/models');
 
 // document.addEventListener ("DOMContentLoaded", event => {
-console.log('hi')
-const collectionButtons = document.querySelectorAll('.collectionId')
+const reviewButtons = document.querySelectorAll('#review-btn')
 
-for (let i = 0; i < collectionButtons.length; i++) {
-  const collectionButton = collectionButtons[i]
+for (let i = 0; i < reviewButtons.length; i++) {
+  const reviewButton = reviewButtons[i]
 
-  collectionButton.addEventListener("click", async (e) => {
+  reviewButton.addEventListener("click", async (e) => {
     e.preventDefault();
     const id = e.target.id;
-    console.log('COLLECTION ID -----------------', id);
+    console.log('REVIEW ID -----------------', id);
 
-    const res = await fetch(`/collections/${id}`, {
+    const res = await fetch(`/reviews/${id}`, {
       method: 'DELETE'
     });
 
@@ -27,7 +26,32 @@ for (let i = 0; i < collectionButtons.length; i++) {
   });
 
 }
-// });
+
+const reviewButtons = document.querySelectorAll('.collectionId')
+
+for (let i = 0; i < collectionButtons.length; i++) {
+  const reviewButton = reviewButtons[i]
+
+  reviewButton.addEventListener("click", async (e) => {
+    e.preventDefault();
+    const id = e.target.id;
+    console.log('review ID -----------------', id);
+
+    const res = await fetch(`/reviews/${id}`, {
+      method: 'DELETE'
+    });
+
+    let success = await res.json()
+
+    if (success.message === 'Success') {
+      const container = document.querySelector(`#container-${id}`)
+      container.remove();
+    }
+
+  });
+
+}
+
 
 
 // const deleteBtns = document.querySelectorAll('.delete-btn')
@@ -55,4 +79,3 @@ for (let i = 0; i < collectionButtons.length; i++) {
 //     }
 //   })
 // // }
-
