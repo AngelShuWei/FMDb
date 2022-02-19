@@ -20,7 +20,7 @@ block content
             each collection in collections
               option(value=`${collection.id}#${pk}`)=collection.name
       div(class='add-review') Leave a review here
-        form(action="/reviews/add" method="post" class="registration-form")
+        form(action="/reviews/add" method="post" class="registration-forms")
           +validationErrorSummary(errors)
           input(type="hidden" name="_csrf" value=csrfToken)
           input(type="hidden" name="movieId" value=pk)
