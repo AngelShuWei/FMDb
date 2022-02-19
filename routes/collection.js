@@ -241,7 +241,7 @@ router.post('/:id/edit', csrfProtection, asyncHandler( async(req, res, next) => 
     const { name } = req.body;
     collection.name = name
     await collection.save();
-
+  
     // await pet.update({
     //   name: "Fido, Sr."
     // });

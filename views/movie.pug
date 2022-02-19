@@ -25,8 +25,10 @@ block content
         input(type="hidden" name="_csrf" value=csrfToken)
         input(type="hidden" name="movieId" value=pk)
         input(type="hidden" name="userId" value=userId)
-        +field("Review", "content", review.content)
-        +field("Rating", "rating", review.rating, type='number', max='5')
+        textarea(id="reviews-text-area", labelText="Review", name="content", cols="20", rows="10") #{review.content}
+        //- +field("Review", "content", review.content, type='textarea')
+   
+        //- +field("Rating", "rating", review.rating, type='number', max='5')
         div(class="registerCancelContainer")
           button(type="submit" class="register" id="registerLog") Add Review
     div
