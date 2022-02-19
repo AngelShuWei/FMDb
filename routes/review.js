@@ -47,25 +47,6 @@ router.get("/add", csrfProtection, asyncHandler(async (req, res) => {
     };
 }));
 
-const collectionValidators = [
-    check('name')
-        .exists({ checkFalsy: true })
-        .withMessage('Please provide a value for your Collection')
-        .isLength({ max: 50 })
-        .withMessage('The Collection name must not be more than 50 characters long')
-    // .custom((value) => { //value is whatever the user passed in. It gets fed into the chain
-    //   return db.Collection.findOne({ where: {
-    //     name: value,
-    //     userId: req.session.auth.userId //means that for EACH user, needs to have unique collection name
-    //    }})
-    //     .then((collection) => { //if true, then will reject that request
-    //       if (collection) {
-    //         return Promise.reject('The Collection name already exists');
-    //       }
-    //     });
-    // }),
-];
-
 const reviewValidators = [
     check('content')
         .exists({checkFalsy: true})
@@ -79,9 +60,18 @@ const reviewValidators = [
 
 router.post('/add', csrfProtection, reviewValidators, asyncHandler(async (req, res) => {
     // const id = req.session.auth.userId;
+
     // console.log(id);
 
-    const { content, rating, userId, movieId } = req.body;
+    // const { content, rating, userId, movieId } = req.body;
+
+    // //Check to see if 1) user is logged in and 2) user has already created a review for this movie:
+    // if (req.session.auth) {
+    //     const existingReview = await db.Review.findOne({ where: { userId, movieId } });
+
+    // }
+
+    // const existingReview = await db.Review.findOne({where: {userId, movieId} });
 
     const review = db.Review.build({ content, rating, userId, movieId });
 
