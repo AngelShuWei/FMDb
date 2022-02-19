@@ -92,6 +92,7 @@ body {
   margin-right: auto;
   margin-left: auto;
   width: fit-content;
+
 }
 
 #nav-logo {
@@ -310,6 +311,11 @@ a.cancel {
   display: flex;
   flex-direction: row;
   align-items: center;
+  background-color: rgba(128, 128, 128, 0.376);
+  width: 180px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-radius: 5px;
 }
 
 .nameContainer {
@@ -319,9 +325,15 @@ a.cancel {
 #btnContainer {
   padding-left: 15px;
 }
-/* .collectionContainer > * {
-  padding-left: 15px;
+/* 
+.editBtn {
+  font-family: Roboto,Helvetica,Arial,sans-serif;
+}
+
+.delBtn {
+  font-family: Roboto,Helvetica,Arial,sans-serif;
 } */
+
 
 div.create-collection {
   display: flex;
@@ -329,7 +341,7 @@ div.create-collection {
   justify-content: center;
   padding: 7px;
   border-radius: 5px;
-  border: 20px rgba(245,197,24);
+  border: 1px solid rgba(245,197,24);
 }
 
 div.create-collection:hover {
