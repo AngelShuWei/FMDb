@@ -193,6 +193,9 @@ div.movie-contents-container {
 
 div.movie-name-year {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 a {
@@ -264,13 +267,6 @@ a.cancel {
   justify-content: center;
 }
 
-.registration-form {
-  display: grid;
-  /* grid-template-columns: 200px; */
-  background-color: rgba(61, 59, 59, 0.685);
-  border-radius: 7px;
-}
-
 .alreadyRegisteredContainer {
   display: flex;
   justify-content: center;
@@ -299,6 +295,13 @@ a.cancel {
   background-color: rgba(61, 59, 59, 0.685);
   border-radius: 7px;
   justify-content: center;
+}
+
+.registration-form {
+  display: grid;
+  /* grid-template-columns: 200px; */
+  background-color: rgba(61, 59, 59, 0.685);
+  border-radius: 7px;
 }
 
 .demoButton {
@@ -377,4 +380,85 @@ div.create-collection {
 
 div.create-collection:hover {
   background-color: rgba(128, 128, 128, 0.376);
+}
+
+/* Reviews Form */
+.add-review {
+  margin-top: 1%;
+  margin-bottom: 1%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background: #121212;
+  border-radius: 8px;
+}
+
+.registration-forms {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#reviews-text-area {
+  width: 95%;
+  height: 100px;
+  font-size: inherit;
+  margin-top: 10px;
+}
+
+/* Reviews Edit Form */
+.review-edit-container {
+  display: flex;
+  flex-direction: column;
+  background: #121212;
+  padding-top: 5%;
+  padding-bottom: 10%;
+  align-items: center;
+  border-radius: 2%;
+}
+
+.review-edit-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  gap: 10px;
+}
+
+.edit-review-text {
+  width: 85%;
+  height: 100px;
+  margin-top: 15px;
+}
+
+.star-rating {
+  background: transparent;
+  color: #f4c518;
+  border: transparent;
+  font-size: 40px;
+}
+.star-rating:hover {
+  background: transparent;
+  color: #f7f6f5;
+  border: transparent;
+  font-size: 40px;
+  transition: 2s;
+}
+
+.rating-edit-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 2%;
+  font-size: 20px;
+}
+
+.rating-input {
+  font-size: inherit;
 }

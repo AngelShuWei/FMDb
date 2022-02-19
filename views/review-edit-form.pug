@@ -3,13 +3,17 @@ extends layout.pug
 include utils.pug
 
 block content
-    div Edit your review
-        form(action=`/reviews/${reviewId}/edit` method='POST')
+    div(class="review-edit-container") Edit your review
+        form(action=`/reviews/${reviewId}/edit` method='POST' class="review-edit-form")
             +validationErrorSummary(errors)
             input(type="hidden" name="_csrf" value=csrfToken)
             input(type="hidden" name="movieId" value=pk)
             input(type="hidden" name="userId" value=userId)
-            +field("Review", "content", reviewContent)
-            +field("Rating", "rating", reviewRating, type='number', max='5')
+            textarea(id="reviews-text-area", labelText="Review", name="content", class='edit-review-text')=reviewContent
+            div(class="rating-edit-container")
+                p ★
+                input(labelText="Rating", name="rating", type="number", min= '1', max='5', value=reviewRating, class="rating-input")
+                p ★
+
             div(class="registerCancelContainer")
             button(type="submit" class="register" id="registerLog") Add Review
