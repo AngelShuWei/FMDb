@@ -156,6 +156,12 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res, next) => {
 
 
 router.post('/add-movie', csrfProtection, asyncHandler(async (req, res, next) => {
+
+  if (!req.params.auth) {
+    next(notLoggedInError(req, res, next));
+  }
+
+
   const userId = req.session.auth.userId; //finding out that the user is persisting
 
   const {
