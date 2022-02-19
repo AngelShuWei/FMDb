@@ -266,6 +266,13 @@ a.cancel {
   justify-content: center;
 }
 
+.registration-form {
+  display: grid;
+  /* grid-template-columns: 200px; */
+  background-color: rgba(61, 59, 59, 0.685);
+  border-radius: 7px;
+}
+
 .demoButton {
   height: 30px;
   width: 125px;
