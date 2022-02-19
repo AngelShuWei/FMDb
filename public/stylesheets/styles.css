@@ -162,6 +162,9 @@ div.movie-contents-container {
 
 div.movie-name-year {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 a {
@@ -231,13 +234,6 @@ a.cancel {
 .registerCancelContainer {
   display: flex;
   justify-content: center;
-}
-
-.registration-form {
-  display: grid;
-  /* grid-template-columns: 200px; */
-  background-color: rgba(61, 59, 59, 0.685);
-  border-radius: 7px;
 }
 
 .alreadyRegisteredContainer {
@@ -348,8 +344,34 @@ div.create-collection:hover {
   background-color: rgba(128, 128, 128, 0.376);
 }
 
+/* Reviews Form */
+.add-review {
+  margin-top: 1%;
+  margin-bottom: 1%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background: #121212;
+  border-radius: 8px;
+}
 
+.registration-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
+#reviews-text-area {
+  width: 95%;
+  height: 100px;
+  font-size: inherit;
+  margin-top: 10px;
+}
 
 /* Reviews Edit Form */
 .review-edit-container {

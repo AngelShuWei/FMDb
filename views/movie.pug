@@ -9,28 +9,33 @@ block content
       movie.name
       p(id="year")=releaseYear
       img(id="poster", src=imageURL, alt=title, height="630px", width="450px")
-    div(class="movie-description")
-      span(class='description')=description
-      p(class="director") Director: #{director}
-    div(class="add-to-collection")
-      form(action="/collections/add-movie" method="post")
-        input(type="hidden" name="_csrf" value=csrfToken)
-        button(id="btn") Add To Collection
-        select(name="addToCollections")
-          each collection in collections
-            option(value=`${collection.id}#${pk}`)=collection.name
-    div(class='add-review')
-      form(action="/reviews/add" method="post" class="registration-form")
-        +validationErrorSummary(errors)
-        input(type="hidden" name="_csrf" value=csrfToken)
-        input(type="hidden" name="movieId" value=pk)
-        input(type="hidden" name="userId" value=userId)
-        textarea(id="reviews-text-area", labelText="Review", name="content", value="review.content", cols="30", rows="10")
-        //- +field("Review", "content", review.content, type='textarea')
-        input(labelText="Rating", name="rating", type="number", min= '1', max='5', value=review.rating)
-        //- +field("Rating", "rating", review.rating, type='number', max='5')
-        div(class="registerCancelContainer")
-          button(type="submit" class="register" id="registerLog") Add Review
+      div(class="movie-description")
+        span(class='description')=description
+        p(class="director") Director: #{director}
+      div(class="add-to-collection")
+        form(action="/collections/add-movie" method="post")
+          input(type="hidden" name="_csrf" value=csrfToken)
+          button(id="btn") Add To Collection
+          select(name="addToCollections")
+            each collection in collections
+              option(value=`${collection.id}#${pk}`)=collection.name
+      div(class='add-review') Leave a review here
+        form(action="/reviews/add" method="post" class="registration-form")
+          +validationErrorSummary(errors)
+          input(type="hidden" name="_csrf" value=csrfToken)
+          input(type="hidden" name="movieId" value=pk)
+          input(type="hidden" name="userId" value=userId)
+          textarea(id="reviews-text-area", labelText="Review", name="content", value="review.content", placeholder=" Tell us how you feel about this movie here and share your experience") #{review.content}
+
+          div(class="rating-edit-container")
+            p ★
+            input(labelText="Rating", name="rating", type="number", min= '1', max='5', value=review.rating, class="rating-input")
+            p ★
+
+          //- input(labelText="Rating", name="rating", type="number", min= '1', max='5', value=review.rating)
+          //- +field("Rating", "rating", review.rating, type='number', max='5')
+          div(class="registerCancelContainer")
+            button(type="submit" class="register" id="registerLog") Add Review
     div
       each eachReview in reviews
         div
