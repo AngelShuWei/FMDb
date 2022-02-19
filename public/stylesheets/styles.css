@@ -219,6 +219,14 @@ div.movie-name-year {
   align-items: center;
 }
 
+.movie-name {
+  border-radius: 5px;
+}
+
+.movie-name:hover {
+  background-color: rgba(128, 128, 128, 0.376)
+}
+
 a {
   color: white;
   text-decoration: none;
@@ -304,6 +312,14 @@ a.cancel {
   border-radius: 5px;
   color: black;
   font-size: 16px;
+}
+
+.add-to-collection {
+  padding-bottom: 15px;
+}
+
+.add-to-collection-btn-div {
+  padding-left: 7px;
 }
 
 #btn {
