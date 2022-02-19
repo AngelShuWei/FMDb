@@ -14,6 +14,37 @@
 .indiv-review {
   margin-bottom: 25px;
 }
+.reviewsTitle{
+  margin-top: 60px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  color: white;
+  display: block;
+  text-align: center;
+  font-weight: bold;
+}
+
+.review-box {
+  margin-top: 17px;
+  margin-bottom: 17px;
+}
+
+.reviewContent {
+  margin: 15px;
+
+}
+
+.review-box-in-review-list {
+  margin-bottom: 20px;
+}
+
+.reviewMovieName {
+  margin: 15px;
+}
+
+.reviewInreview-box, .ratingInreview-box {
+  color: white;
+}
 
 .movie-in-review {
   text-decoration: underline;
@@ -325,7 +356,7 @@ a.cancel {
 #btnContainer {
   padding-left: 15px;
 }
-/* 
+/*
 .editBtn {
   font-family: Roboto,Helvetica,Arial,sans-serif;
 }

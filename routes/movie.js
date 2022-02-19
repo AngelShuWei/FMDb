@@ -30,7 +30,12 @@ router.get('/', asyncHandler(async (req, res, next) => {
 router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res, next) => { //need to include csrfProtection here because this get page includes a form and the form needs to have csrf upon initial loading
   const id = parseInt(req.params.id, 10);
   const movie = await db.Movie.findByPk(id);
-  const userId = req.session.auth.userId;
+
+  let userId = null;
+  if (req.session.auth) {
+    userId = req.session.auth.userId;
+  }
+
   const collections = await db.Collection.findAll({ where: {userId} });
 
   const review = db.Review.build();

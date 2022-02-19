@@ -10,26 +10,45 @@ const router = express.Router();
 const logIntoReviewError = (req, res, next) => {
     const error = Error("Not Logged In");
     error.status = 404;
-    const message = ("Please log in or register to post a review :");
+    const message = ("Please log in or register to post a review :)");
+    res.render("error", { error, message });
+};
+
+const logIntoStartReviewing = (req, res, next) => {
+    const error = Error("Not Logged In - Cannot Access Reviews");
+    error.status = 404;
+    const message = ("Please log in or register to start reviewing movies :)");
+    res.render("error", { error, message });
+};
+
+const existingReviewError = (req, res, next) => {
+    const error = Error("Review Exists for Current User");
+    error.status = 404;
+    const message = ("You have already posted a review for this movie! :)");
     res.render("error", { error, message });
 };
 
 
-router.get('/', csrfProtection, asyncHandler( async (req, res) => {
-    // const id = parseInt(req.params.id, 10);
-    const userId = req.session.auth.userId;
-    const reviews = await db.Review.findAll({ where: { userId } });
+router.get('/', csrfProtection, asyncHandler( async (req, res, next) => {
 
-    const reviewsAndMovies = [];
+    if (req.session.auth) {
+        const userId = req.session.auth.userId;
+        const reviews = await db.Review.findAll({ where: { userId } });
 
-    for (let i = 0; i < reviews.length; i++) {
-        let review = reviews[i];
-        let movieId = review.movieId;
-        const movie = await db.Movie.findByPk(movieId);
-        reviewsAndMovies.push([review, movie]);
+        const reviewsAndMovies = [];
+
+        for (let i = 0; i < reviews.length; i++) {
+            let review = reviews[i];
+            let movieId = review.movieId;
+            const movie = await db.Movie.findByPk(movieId);
+            reviewsAndMovies.push([review, movie]);
+        }
+
+        res.render('review-list', { title: "My Reviews", reviewsAndMovies });
+    } else {
+        logIntoStartReviewing(req, res, next);
     }
 
-    res.render('review-list', { title: "My Reviews", reviewsAndMovies })
 }));
 
 router.get("/add", csrfProtection, asyncHandler(async (req, res) => {
@@ -47,25 +66,6 @@ router.get("/add", csrfProtection, asyncHandler(async (req, res) => {
     };
 }));
 
-const collectionValidators = [
-    check('name')
-        .exists({ checkFalsy: true })
-        .withMessage('Please provide a value for your Collection')
-        .isLength({ max: 50 })
-        .withMessage('The Collection name must not be more than 50 characters long')
-    // .custom((value) => { //value is whatever the user passed in. It gets fed into the chain
-    //   return db.Collection.findOne({ where: {
-    //     name: value,
-    //     userId: req.session.auth.userId //means that for EACH user, needs to have unique collection name
-    //    }})
-    //     .then((collection) => { //if true, then will reject that request
-    //       if (collection) {
-    //         return Promise.reject('The Collection name already exists');
-    //       }
-    //     });
-    // }),
-];
-
 const reviewValidators = [
     check('content')
         .exists({checkFalsy: true})
@@ -77,11 +77,22 @@ const reviewValidators = [
         .withMessage('Please provide a rating between 1 - 10 :)'),
 ]
 
-router.post('/add', csrfProtection, reviewValidators, asyncHandler(async (req, res) => {
-    // const id = req.session.auth.userId;
-    // console.log(id);
+router.post('/add', csrfProtection, reviewValidators, asyncHandler(async (req, res, next) => {
 
     const { content, rating, userId, movieId } = req.body;
+
+    //Check to see if 1) user is logged in and 2) user has already created a review for this movie:
+    if (req.session.auth) {
+        const existingReview = await db.Review.findOne({ where: { userId, movieId } });
+
+        if (existingReview) {
+            next(existingReviewError(req, res, next));
+        }
+    } else {
+        next(logIntoReviewError(req, res, next));
+    }
+
+    const existingReview = await db.Review.findOne({where: {userId, movieId} });
 
     const review = db.Review.build({ content, rating, userId, movieId });
 
