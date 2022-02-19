@@ -119,6 +119,71 @@ router.delete('/:id', async (req, res) => {
     res.json({ message: 'Success' })
 });
 
+router.get('/:id(\\d+)/edit', csrfProtection, asyncHandler(async (req, res, next) => {
+    if (req.session.auth) {
+      console.log("req.params!!!!________________,", req.params)
+      const reviewId = parseInt(req.params.id, 10)
+      const review = await db.Review.findByPk(reviewId)
+
+      // const userId = req.session.auth.userId;
+
+      const reviewContent = review.content;
+      const reviewRating = review.rating;
+      const userId = review.userId;
+      const pk = review.movieId;
+
+      // console.log("userId--------------------", userId);
+      // const collection = db.Collection.build();
+
+      res.render('review-edit-form', {
+        title: 'Edit An Existing Review',
+        reviewContent,
+        reviewRating,
+        reviewId,
+        userId,
+        pk,
+        csrfToken: req.csrfToken(),
+      });
+
+    } else {
+
+      next(notLoggedInError(req, res, next));
+    };
+
+  }));
+
+router.post('/:id/edit', csrfProtection, asyncHandler( async(req, res, next) => {
+    // console.log('NOW IN THE PUT ROUTER');
+    // console.log("req.params!!!!________________,", req.params)
+
+    if (req.session.auth) {
+      console.log("req.params!!!!________________,", req.params)
+      const reviewId = parseInt(req.params.id, 10)
+      console.log("REVIEW ID here-------!!!!!!!!!!!!!!!!!!!!!!!!", reviewId);
+      const review = await db.Review.findByPk(reviewId)
+      const { content, rating } = req.body;
+      review.content = content;
+      review.rating = rating;
+
+      await review.save();
+
+      // await pet.update({
+      //   name: "Fido, Sr."
+      // });
+
+      // const userId = req.session.auth.userId;
+
+      // console.log("userId--------------------", userId);
+      // const collection = db.Collection.build();
+
+      res.redirect('/reviews');
+
+    } else {
+      next(notLoggedInError(req, res, next));
+    }
+
+  }));
+
 
 
 
