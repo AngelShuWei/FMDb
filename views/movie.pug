@@ -27,7 +27,7 @@ block content
         input(type="hidden" name="userId" value=userId)
         textarea(id="reviews-text-area", labelText="Review", name="content", cols="20", rows="10") #{review.content}
         //- +field("Review", "content", review.content, type='textarea')
-   
+        input(labelText="Rating", name="rating", type="number", min= '1', max='5', value=review.rating)
         //- +field("Rating", "rating", review.rating, type='number', max='5')
         div(class="registerCancelContainer")
           button(type="submit" class="register" id="registerLog") Add Review
