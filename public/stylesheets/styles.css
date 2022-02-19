@@ -23,9 +23,23 @@
   text-align: center;
   font-weight: bold;
 }
+
 .review-box {
   margin-top: 17px;
   margin-bottom: 17px;
+}
+
+.reviewContent {
+  margin: 15px;
+
+}
+
+.review-box-in-review-list {
+  margin-bottom: 20px;
+}
+
+.reviewMovieName {
+  margin: 15px;
 }
 
 .reviewInreview-box, .ratingInreview-box {
