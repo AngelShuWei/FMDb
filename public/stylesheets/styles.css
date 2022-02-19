@@ -1,16 +1,14 @@
-.navbar {
+.navbar-container {
   position: relative;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  -ms-flex-align: center;
   align-items: center;
-  -ms-flex-pack: justify;
   justify-content: space-between;
   padding: 0.5rem 1rem;
   text-align: center;
-  margin-left: 10px;
+  background-color: #121212;
+  margin-bottom: 15px;
+  align-content: center;
 }
 
 .indiv-review {
@@ -27,7 +25,7 @@ body {
   font-family: Roboto,Helvetica,Arial,sans-serif;
 }
 
-.navbar-brand {
+.navbar-button {
   display: inline-block;
   padding-top: 0.3125rem;
   padding-bottom: 0.3125rem;
@@ -39,12 +37,13 @@ body {
 }
 
 .navbar-text {
-  display: inline-block;
+  display: flex;
+  justify-content: flex-end;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   padding-right: 2rem;
   color: white;
-  font-size: 1.5rem;
+  font-size: 16px;
   text-align: center;
 }
 
@@ -52,10 +51,16 @@ body {
   flex-grow: 1;
 }
 
-.navbar-expand-lg .navbar-collapse {
+#navbarText {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .navbar-expand-lg .navbar-collapse {
   display: flex;
   flex-basis: auto;
-}
+} */
 .mr-auto {
   margin-right: auto;
 }
@@ -87,6 +92,7 @@ body {
   margin-right: auto;
   margin-left: auto;
   width: fit-content;
+
 }
 
 #nav-logo {
@@ -165,6 +171,14 @@ a {
 
 a.cancel {
   padding: 7px;
+}
+
+.btn-logout {
+  background-color: rgba(245,197,24);
+  border: none;
+  border-radius: 5px;
+  font-family: Roboto,Helvetica,Arial,sans-serif;
+  font-weight: bold;
 }
 
 a.cancel:hover {
@@ -291,4 +305,45 @@ a.cancel {
 
 .alert-danger {
   width: 500px;
+}
+
+.collectionContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: rgba(128, 128, 128, 0.376);
+  width: 180px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-radius: 5px;
+}
+
+.nameContainer {
+  width: 70px;
+}
+
+#btnContainer {
+  padding-left: 15px;
+}
+/* 
+.editBtn {
+  font-family: Roboto,Helvetica,Arial,sans-serif;
+}
+
+.delBtn {
+  font-family: Roboto,Helvetica,Arial,sans-serif;
+} */
+
+
+div.create-collection {
+  display: flex;
+  width: 180px;
+  justify-content: center;
+  padding: 7px;
+  border-radius: 5px;
+  border: 1px solid rgba(245,197,24);
+}
+
+div.create-collection:hover {
+  background-color: rgba(128, 128, 128, 0.376);
 }

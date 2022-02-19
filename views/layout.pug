@@ -7,27 +7,23 @@ html
       link(rel='stylesheet' href="/stylesheets/styles.css")
       title FMDb - #{title}
   body
-    nav(class='navbar navbar-expand-lg navbar-dark bg-primary')
+    nav(class='navbar-container')
       a(href=`http://localhost:8080/`)
         img(id='nav-logo' src='/images/logo.png')
-      a(class='navbar-brand' href='/movies') Movies
-      a(class='navbar-brand' href='/collections') Collections
-      a(class='navbar-brand' href='/reviews') Reviews
+      a(class='navbar-button' href='/movies') Movies
+      a(class='navbar-button' href='/collections') Collections
+      a(class='navbar-button' href='/reviews') Reviews
         span(class='navbar-toggler-icon')
-      div(class='collapse navbar-collapse' id='navbarText')
+      div(class='navbar-collapse' id='navbarText')
         ul(class='navbar-nav mr-auto')
-          //- Empty menu keeps the content that follows the
-          //- unordered list correctly positioned on the
-          //- right side of the navbar.
         if locals.authenticated
-          span(class='navbar-text px-4') Welcome #{user.username}!
-          form(class='form-inline pr-4' action='/user/logout' method='post')
+          div(class='navbar-text') Welcome #{user.username}!
+          form(class='form-inline' action='/user/logout' method='post')
             button(class='btn btn-logout' type='submit') Logout
         else
-          span(class='navbar-text px-4')
+          div(class='navbar-text')
             a(class='btn login' href='/user/login') Login
             a(class='btn register' href='/user/register') Register
     .container
       h2(class='titles') #{title}
       block content
-    script(src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous') script(src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js' integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo' crossorigin='anonymous') script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js' integrity='sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6' crossorigin='anonymous')
