@@ -185,7 +185,6 @@ body {
   border-bottom: 2px solid rgba(128, 128, 128, 0.376);
 }
 
-
 .movie-description {
   color: white;
   font-size: 16px;
@@ -199,6 +198,10 @@ body {
 #year {
   color: #FFFFFFB3;
   font-weight: bold;
+}
+
+.star-text {
+  font-size: 16px;
 }
 
 #poster {
