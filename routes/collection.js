@@ -15,6 +15,13 @@ const notLoggedInError = (req, res, next) => {
   res.render('error', { error, message });
 };
 
+const existingCollectionMovie = (req, res, next) => {
+  const error = Error("Movie already exists in collection");
+  error.status = 404;
+  const message = "This movie already exists in that collection :)";
+  res.render('error', { error, message });
+};
+
 router.get('/', asyncHandler(async (req, res, next) => {
   if (req.session.auth) {
     const userId = req.session.auth.userId;
@@ -148,7 +155,7 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res, next) => {
 
 
 
-router.post('/add-movie', csrfProtection, asyncHandler(async (req, res) => {
+router.post('/add-movie', csrfProtection, asyncHandler(async (req, res, next) => {
   const userId = req.session.auth.userId; //finding out that the user is persisting
 
   const {
@@ -167,7 +174,14 @@ router.post('/add-movie', csrfProtection, asyncHandler(async (req, res) => {
       movieId,
       collectionId
     }
-  })
+  });
+
+  console.log("TABLE EXISTS------------------t", tableExists);
+
+  if (tableExists) {
+    next(existingCollectionMovie(req, res,next));
+    return;
+  }
 
   if (!tableExists) {
     const collectionMovie = db.CollectionMovie.build({
@@ -178,11 +192,13 @@ router.post('/add-movie', csrfProtection, asyncHandler(async (req, res) => {
     await collectionMovie.save();
     // res.redirect(`/collections/${collectionId}`)
     res.redirect(`/movies/${movieId}`);
-  } else {
-    //TO DO
-    //RE RENDER PAGE WITH ERROR BECAUSE JOIN TABLE EXISTS ALREADY
-    res.send('Cannot add same movie into this collection');
-  }
+  };
+  // } else {
+  //   //TO DO
+  //   //RE RENDER PAGE WITH ERROR BECAUSE JOIN TABLE EXISTS ALREADY
+  //   next(existingCollectionMovie)
+  //   //
+  // }
 
 })
 );
