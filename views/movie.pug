@@ -1,7 +1,7 @@
 extends layout.pug
 include utils.pug
 append head
- 
+
 
 block content
   div(class="movie-contents-container")
@@ -29,6 +29,12 @@ block content
         +field("Rating", "rating", review.rating, type='number', max='5')
         div(class="registerCancelContainer")
           button(type="submit" class="register" id="registerLog") Add Review
+    div
+      each eachReview in reviews
+        div
+          p=eachReview.content
+          p=eachReview.rating
+
             //- pk is the id of the movie. on line 38, pk movie.id
             //- the select is the dropdown and the options are inside the select.
             //- whatever option you choose from the drop down will become the new select that why select has the collection name i.e. Romance
