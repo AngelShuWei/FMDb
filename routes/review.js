@@ -10,7 +10,14 @@ const router = express.Router();
 const logIntoReviewError = (req, res, next) => {
     const error = Error("Not Logged In");
     error.status = 404;
-    const message = ("Please log in or register to post a review :");
+    const message = ("Please log in or register to post a review :)");
+    res.render("error", { error, message });
+};
+
+const existingReviewError = (req, res, next) => {
+    const error = Error("Review Exists for Current User");
+    error.status = 404;
+    const message = ("You have already posted a review for this movie! :)");
     res.render("error", { error, message });
 };
 
@@ -58,20 +65,22 @@ const reviewValidators = [
         .withMessage('Please provide a rating between 1 - 10 :)'),
 ]
 
-router.post('/add', csrfProtection, reviewValidators, asyncHandler(async (req, res) => {
-    // const id = req.session.auth.userId;
+router.post('/add', csrfProtection, reviewValidators, asyncHandler(async (req, res, next) => {
 
-    // console.log(id);
+    const { content, rating, userId, movieId } = req.body;
 
-    // const { content, rating, userId, movieId } = req.body;
+    //Check to see if 1) user is logged in and 2) user has already created a review for this movie:
+    if (req.session.auth) {
+        const existingReview = await db.Review.findOne({ where: { userId, movieId } });
 
-    // //Check to see if 1) user is logged in and 2) user has already created a review for this movie:
-    // if (req.session.auth) {
-    //     const existingReview = await db.Review.findOne({ where: { userId, movieId } });
+        if (existingReview) {
+            next(existingReviewError(req, res, next));
+        }
+    } else {
+        next(logIntoReviewError(req, res, next));
+    }
 
-    // }
-
-    // const existingReview = await db.Review.findOne({where: {userId, movieId} });
+    const existingReview = await db.Review.findOne({where: {userId, movieId} });
 
     const review = db.Review.build({ content, rating, userId, movieId });
 
