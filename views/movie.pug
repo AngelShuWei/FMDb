@@ -25,7 +25,7 @@ block content
         input(type="hidden" name="_csrf" value=csrfToken)
         input(type="hidden" name="movieId" value=pk)
         input(type="hidden" name="userId" value=userId)
-        textarea(id="reviews-text-area", labelText="Review", name="content", cols="30", rows="10") #{review.content}
+        textarea(id="reviews-text-area", labelText="Review", name="content", value="review.content", cols="30", rows="10")
         //- +field("Review", "content", review.content, type='textarea')
         input(labelText="Rating", name="rating", type="number", min= '1', max='5', value=review.rating)
         //- +field("Rating", "rating", review.rating, type='number', max='5')
