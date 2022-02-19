@@ -161,6 +161,16 @@ body {
   margin-right: 50px; */
 }
 
+#movie-poster {
+  padding: 10px;
+}
+
+#movie-poster:hover {
+  background-color: rgba(128, 128, 128, 0.376);
+  border-radius: 5px;
+}
+
+
 .movie {
   text-align: center;
   font-size: 15px;
