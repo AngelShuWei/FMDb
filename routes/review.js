@@ -96,7 +96,7 @@ router.post('/add', csrfProtection, reviewValidators, asyncHandler(async (req, r
 
     if (!errors.length) { //there is NO length in the errors arary meaning it's good
         await review.save(); //then we want to save the collection
-        res.redirect('/reviews'); // then redirect the page
+        res.redirect(`/movies/${movieId}`); // then redirect the page
     } else {
         const review = db.Review.build();
         res.render('movie', { title: movie.name, review, userId, description: movie.description, director: movie.director, releaseYear: movie.releaseYear, imageURL: movie.imageURL, pk: movie.id, collections, errors, csrfToken: req.csrfToken() });
