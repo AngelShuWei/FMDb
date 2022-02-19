@@ -31,7 +31,7 @@ const existingReviewError = (req, res, next) => {
 
 router.get('/', csrfProtection, asyncHandler( async (req, res, next) => {
 
-    if (req.params.auth) {
+    if (req.session.auth) {
         const userId = req.session.auth.userId;
         const reviews = await db.Review.findAll({ where: { userId } });
 
