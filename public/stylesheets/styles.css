@@ -58,13 +58,17 @@ body {
 
 .navbar-button {
   display: inline-block;
-  padding-top: 0.3125rem;
-  padding-bottom: 0.3125rem;
   margin-left: 20px;
   line-height: inherit;
   white-space: nowrap;
   color: white;
   text-align: center;
+  border-radius: 5px;
+  padding: 0.3125rem 5px 0.3125rem 5px;
+}
+
+.navbar-button:hover {
+  background-color: rgba(128, 128, 128, 0.376);
 }
 
 .navbar-text {
