@@ -132,7 +132,6 @@ body {
   margin-right: auto;
   margin-left: auto;
   width: fit-content;
-
 }
 
 #nav-logo {
@@ -512,4 +511,17 @@ div.create-collection:hover {
 
 .rating-input {
   font-size: inherit;
+}
+
+
+.registration-form.review-box {
+  display: flex;
+  width: 500px;
+  justify-content: space-around;
+}
+
+
+.review-content {
+  padding-left: 15px;
+  padding-right: 15px;
 }
