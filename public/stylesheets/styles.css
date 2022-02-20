@@ -424,6 +424,7 @@ a.cancel {
 
 .nameContainer {
   width: 70px;
+  word-wrap: break-word;
 }
 
 #btnContainer {
@@ -646,4 +647,17 @@ div.create-collection:hover {
   padding: 25px;
   margin-top: 10px;
   border-radius: 10px;
+}
+
+.edit-btn {
+  background-color: white;
+  border-width: 0px;
+  border-style: none;
+  border-radius: 5px;
+  color: black;
+  font-size: 16px;
+}
+
+.edit-btn-container {
+  padding-left: 10px;
 }
