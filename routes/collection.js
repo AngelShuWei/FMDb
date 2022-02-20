@@ -157,7 +157,7 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res, next) => {
 
 router.post('/add-movie', csrfProtection, asyncHandler(async (req, res, next) => {
 
-  if (!req.params.auth) {
+  if (!req.session.auth) {
     next(notLoggedInError(req, res, next));
   }
 
@@ -230,16 +230,17 @@ router.get('/:id(\\d+)/edit', csrfProtection, asyncHandler(async (req, res, next
     const collectionId = parseInt(req.params.id, 10)
     const collection = await db.Collection.findByPk(collectionId)
 
-    // const userId = req.session.auth.userId;
+    const userId = req.session.auth.userId;
 
     const collectionName = collection.name
     // console.log("userId--------------------", userId);
     // const collection = db.Collection.build(); dd
 
     res.render('collection-edit-form', {
-      title: 'Edit An Existing Collection',
+      title: 'Edit Collection Name',
       collectionId,
       collectionName,
+      userId,
       csrfToken: req.csrfToken(),
     });
 
@@ -260,20 +261,23 @@ router.post('/:id/edit', csrfProtection, asyncHandler( async(req, res, next) => 
     const collectionId = parseInt(req.params.id, 10)
     // console.log("COLLECTION ID here-------!!!!!!!!!!!!!!!!!!!!!!!!", collectionId);
     const collection = await db.Collection.findByPk(collectionId)
-    const { name } = req.body;
-    collection.name = name
-    await collection.save();
-  
-    // await pet.update({
-    //   name: "Fido, Sr."
-    // });
+    const { name, userId } = req.body;
 
-    // const userId = req.session.auth.userId;
+    const errors = [];
 
-    // console.log("userId--------------------", userId);
-    // const collection = db.Collection.build();
-
-    res.redirect('/collections');
+    if (name) {
+      const existingCollection = await db.Collection.findOne({where: {name, userId}});
+      if (!existingCollection) {
+        collection.name = name
+        await collection.save();
+        res.redirect('/collections');
+      } else {
+        errors.push('Collection name already exists! :)');
+        // const collection = db.Collection.build();
+        const collectionName = name;
+        res.render('collection-edit-form', { title: 'Edit Collection Name', collectionName, collectionId, name, userId, errors, csrfToken: req.csrfToken() });
+      }
+    }
 
   } else {
     next(notLoggedInError(req, res, next));

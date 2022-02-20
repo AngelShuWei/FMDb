@@ -5,6 +5,9 @@ include utils.pug
 block content
     div(class="collection-edit-container") Rename your collection below
         form(action=`/collections/${collectionId}/edit` method='POST' class="collection-edit-form")
+            +validationErrorSummary(errors)
             input(type='hidden' name='_csrf' value=csrfToken)
+            input(type='hidden' name='userId' value=userId)
+            input(type='hidden' name='collectionId' value=collectionId)
             input(type='text' name='name' value=collectionName)
             button(type='submit' class='edit-btn') Submit
