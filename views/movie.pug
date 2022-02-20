@@ -38,12 +38,30 @@ block content
             button(type="submit" class="register" id="registerLog") Add Review
     div
     p(class='reviewsTitle') Reviews
-      each eachReview in reviews
+      each reviewAndUser in reviewsAndUsers
         div.registration-form.review-box
-          span(class='reviewInreview-box') Review:
-          p "#{eachReview.content}"
+          span(class='reviewInreview-box') #{reviewAndUser[1].username} said:
+          p "#{reviewAndUser[0].content}"
           span(class='ratingInreview-box') Rating:
-          p #{eachReview.rating}/5
+          p #{reviewAndUser[0].rating}/5
+
+
+
+      //- each eachReview in reviews
+      //-   div.registration-form.review-box
+      //-     span(class='reviewInreview-box') Review:
+      //-     p "#{eachReview.content}"
+      //-     span(class='ratingInreview-box') Rating:
+      //-     p #{eachReview.rating}/5
+
+
+
+
+
+
+
+
+
 
             //- pk is the id of the movie. on line 38, pk movie.id
             //- the select is the dropdown and the options are inside the select.

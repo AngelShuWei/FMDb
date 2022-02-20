@@ -41,10 +41,19 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res, next) => 
   const review = db.Review.build();
   const reviews = await db.Review.findAll({where: {movieId: id}});
 
-  console.log("reviews------------", reviews);
+  const reviewsAndUsers = [];
+
+  for (let i = 0; i < reviews.length; i++) {
+    let review = reviews[i];
+    let userId = review.userId;
+    const user = await db.User.findByPk(userId);
+    reviewsAndUsers.push([review, user]);
+  }
+
+
 
   if (movie) {
-    res.render('movie', { title: movie.name, reviews, review, userId, description: movie.description, director: movie.director, releaseYear: movie.releaseYear, imageURL: movie.imageURL, pk: movie.id, collections, csrfToken: req.csrfToken() });
+    res.render('movie', { title: movie.name, reviewsAndUsers, reviews, review, userId, description: movie.description, director: movie.director, releaseYear: movie.releaseYear, imageURL: movie.imageURL, pk: movie.id, collections, csrfToken: req.csrfToken() });
   } else {
     next(movieNotFoundError(req, res, next));
   }

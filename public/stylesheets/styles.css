@@ -34,8 +34,13 @@
 
 }
 
+.review-box{
+  padding: 22px;
+}
+
 .review-box-in-review-list {
   margin-bottom: 20px;
+  padding: 15px;
 }
 
 .reviewMovieName {
