@@ -9,6 +9,7 @@ block content
                     a(href=`http://localhost:8080/movies/${reviewAndMovie[1].id}`).movie-in-review
                         div(class='reviewMovieName') #{reviewAndMovie[1].name}
                     div(class='reviewContent') "#{reviewAndMovie[0].content}"
+                    div(class='reviewContent' id='review-rating-text') Rating: #{reviewAndMovie[0].rating}/5
                     div(class='rev-btn-container')
                         span(class='rev-edit-btn-container')
                             a(href=`http://localhost:8080/reviews/${reviewAndMovie[0].id}/edit`)

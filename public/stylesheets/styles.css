@@ -670,3 +670,7 @@ div.create-collection:hover {
 .edit-btn-container {
   padding-left: 10px;
 }
+
+#review-rating-text {
+ color: white;
+}
