@@ -72,9 +72,9 @@ const reviewValidators = [
         .withMessage("Reviews can not be empty :)"),
     check('rating')
         .exists({checkFalsy: true})
-        .withMessage('Please add a rating 1 - 10 :)')
+        .withMessage('Please add a rating betweenn 1 - 5 :)')
         .isInt({ min: 0 , max: 10})
-        .withMessage('Please provide a rating between 1 - 10 :)'),
+        .withMessage('Please provide a rating between 1 - 5 :)'),
 ]
 
 router.post('/add', csrfProtection, reviewValidators, asyncHandler(async (req, res, next) => {
@@ -168,26 +168,32 @@ router.post('/:id/edit', csrfProtection, asyncHandler( async(req, res, next) => 
     // console.log("req.params!!!!________________,", req.params)
 
     if (req.session.auth) {
-      console.log("req.params!!!!________________,", req.params)
+    //   console.log("req.params!!!!________________,", req.params)
       const reviewId = parseInt(req.params.id, 10)
-      console.log("REVIEW ID here-------!!!!!!!!!!!!!!!!!!!!!!!!", reviewId);
+    //   console.log("REVIEW ID here-------!!!!!!!!!!!!!!!!!!!!!!!!", reviewId);
       const review = await db.Review.findByPk(reviewId)
-      const { content, rating } = req.body;
-      review.content = content;
-      review.rating = rating;
+      const { content, rating, userId, movieId } = req.body;
 
-      await review.save();
+      const errors = [];
 
-      // await pet.update({
-      //   name: "Fido, Sr."
-      // });
+      if (content && rating) {
+        review.content = content;
+        review.rating = rating;
 
-      // const userId = req.session.auth.userId;
+        await review.save();
+        res.redirect('/reviews');
+      } else {
+          if (!content) {
+              errors.push("Reviews can not be empty :)");
+          }
 
-      // console.log("userId--------------------", userId);
-      // const collection = db.Collection.build();
+          if (!rating) {
+              errors.push('Please provide a rating between 1 - 5 :)');
+          }
 
-      res.redirect('/reviews');
+          const review = db.Review.build();
+          res.render('review-edit-form', { title: 'Edit Your Review', reviewId, review, userId, movieId, errors, csrfToken: req.csrfToken() });
+      }
 
     } else {
       next(notLoggedInError(req, res, next));
