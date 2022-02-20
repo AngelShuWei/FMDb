@@ -51,6 +51,10 @@
   color: white;
 }
 
+.ratingInreview-box {
+  color: rgba(245,197,24);
+}
+
 .movie-in-review {
   text-decoration: underline;
 }
@@ -132,7 +136,6 @@ body {
   margin-right: auto;
   margin-left: auto;
   width: fit-content;
-
 }
 
 #nav-logo {
@@ -224,6 +227,14 @@ div.movie-name-year {
   align-items: center;
 }
 
+.movie-name {
+  border-radius: 5px;
+}
+
+.movie-name:hover {
+  background-color: rgba(128, 128, 128, 0.376)
+}
+
 a {
   color: white;
   text-decoration: none;
@@ -309,6 +320,14 @@ a.cancel {
   border-radius: 5px;
   color: black;
   font-size: 16px;
+}
+
+.add-to-collection {
+  padding-bottom: 15px;
+}
+
+.add-to-collection-btn-div {
+  padding-left: 7px;
 }
 
 #btn {
@@ -496,4 +515,17 @@ div.create-collection:hover {
 
 .rating-input {
   font-size: inherit;
+}
+
+.registration-form.review-box {
+  display: flex;
+  width: 640px;
+  justify-content: space-between;
+}
+
+.review-content {
+  width: 600px;
+  height: auto;
+  word-wrap: break-word;
+
 }

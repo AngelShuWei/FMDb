@@ -8,6 +8,7 @@ block content
                 div(class='reviewMovieName') #{reviewAndMovie[1].name}
             div(class='reviewContent') "#{reviewAndMovie[0].content}"
             div
-                button(id=`review-${reviewAndMovie[0].id}`).reviewBtn Delete
                 a(href=`http://localhost:8080/reviews/${reviewAndMovie[0].id}/edit`)
                     button(class='editBtn') Edit
+                button(id=`review-${reviewAndMovie[0].id}`).reviewBtn Delete
+
