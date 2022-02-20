@@ -22,7 +22,7 @@ const userValidators = [
     .exists({ checkFalsy: true })
     .withMessage('Please provide a value for Username')
     .isLength({ max: 20 })
-    .withMessage('First Name must not be more than 20 characters long')
+    .withMessage('Username must not be more than 20 characters long')
     .custom((value) => {
       return db.User.findOne({ where: { username: value } })
         .then((user) => {
