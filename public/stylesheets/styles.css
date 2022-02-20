@@ -128,7 +128,6 @@ body {
   margin-bottom: 5px;
 }
 
-
 .container {
   /* width: 100%; */
   padding-right: 15px;
@@ -136,6 +135,11 @@ body {
   margin-right: auto;
   margin-left: auto;
   width: fit-content;
+}
+
+#reviews-container {
+  width: 800px;
+  height: auto;
 }
 
 #nav-logo {
@@ -527,5 +531,39 @@ div.create-collection:hover {
   width: 600px;
   height: auto;
   word-wrap: break-word;
+}
 
+.reviewContent {
+  width: 740px;
+  word-wrap: break-word;
+}
+
+.rev-edit-btn {
+  background-color: white;
+  border-width: 0px;
+  border-style: none;
+  border-radius: 5px;
+  color: black;
+  font-size: 16px;
+}
+.rev-edit-btn {
+  background-color: white;
+  border-width: 0px;
+  border-style: none;
+  border-radius: 5px;
+  color: black;
+  font-size: 16px;
+}
+
+.rev-btn-container {
+  padding-bottom: 15px;
+  padding-top: 10px;
+}
+
+.rev-edit-btn-container {
+  padding-left: 15px;
+}
+
+.rev-del-btn-container {
+ padding-left: 15px;
 }
