@@ -92,7 +92,7 @@ router.post('/add', csrfProtection, reviewValidators, asyncHandler(async (req, r
         next(logIntoReviewError(req, res, next));
     }
 
-    const existingReview = await db.Review.findOne({where: {userId, movieId} });
+    // const existingReview = await db.Review.findOne({where: {userId, movieId} });
 
     const review = db.Review.build({ content, rating, userId, movieId });
 
