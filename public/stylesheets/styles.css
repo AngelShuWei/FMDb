@@ -14,6 +14,8 @@
 .indiv-review {
   margin-bottom: 25px;
 }
+
+
 .reviewsTitle{
   margin-top: 60px;
   margin-bottom: 20px;
@@ -170,7 +172,8 @@ body {
   font-size: 48px;
   margin: 0 auto;
   text-align: center;
-  padding-bottom: 15px;
+  padding-bottom: 40px;
+  padding-top: 20px;
 }
 
 .movie-list {
@@ -426,15 +429,30 @@ a.cancel {
 #btnContainer {
   padding-left: 15px;
 }
-/*
-.editBtn {
+
+.collection-edit-btn {
   font-family: Roboto,Helvetica,Arial,sans-serif;
+  background-color: white;
+  border-width: 0px;
+  border-style: none;
+  border-radius: 5px;
+  color: black;
+  font-size: 16px;
 }
 
-.delBtn {
+.collection-del-btn {
   font-family: Roboto,Helvetica,Arial,sans-serif;
-} */
+  background-color: white;
+  border-width: 0px;
+  border-style: none;
+  border-radius: 5px;
+  color: black;
+  font-size: 16px;
+}
 
+.collection-edit-btn-container {
+  padding-right: 10px;
+}
 
 div.create-collection {
   display: flex;
@@ -442,12 +460,12 @@ div.create-collection {
   justify-content: center;
   padding: 7px;
   border-radius: 5px;
-  border: 1px solid rgba(245,197,24);
+  background-color: rgba(128, 128, 128, 0.376);
   margin-bottom: 25px;
 }
 
 div.create-collection:hover {
-  background-color: rgba(128, 128, 128, 0.376);
+  border: 1px solid rgba(245,197,24);
 }
 
 /* Reviews Form */
@@ -579,7 +597,7 @@ div.create-collection:hover {
 }
 
 .rev-del-btn-container {
- padding-left: 15px;
+ padding-left: 10px;
 }
 
 /* Collections Stylings */
