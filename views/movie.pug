@@ -36,8 +36,7 @@ block content
           //- +field("Rating", "rating", review.rating, type='number', max='5')
           div(class="registerCancelContainer")
             button(type="submit" class="register" id="registerLog") Add Review
-    div
-
+    div(class='reviews-container')
       if reviewsAndUsers
         p(class='reviewsTitle') Reviews
           each reviewAndUser in reviewsAndUsers
