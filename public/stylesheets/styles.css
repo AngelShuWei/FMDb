@@ -23,7 +23,9 @@
   text-align: center;
   font-weight: bold;
 }
-
+.titleInLayout {
+  margin-bottom: 30px;
+}
 .review-box {
   margin-top: 17px;
   margin-bottom: 17px;
@@ -36,6 +38,8 @@
 
 .review-box{
   padding: 22px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .review-box-in-review-list {
@@ -45,6 +49,10 @@
 
 .reviewMovieName {
   margin: 15px;
+}
+
+.reviewInreview-box {
+  color: rgba(245,197,24) !important;
 }
 
 .reviewInreview-box, .ratingInreview-box {
@@ -527,5 +535,5 @@ div.create-collection:hover {
   width: 600px;
   height: auto;
   word-wrap: break-word;
-
+  color: white;
 }
