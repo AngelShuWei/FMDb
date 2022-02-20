@@ -273,7 +273,9 @@ router.post('/:id/edit', csrfProtection, asyncHandler( async(req, res, next) => 
         res.redirect('/collections');
       } else {
         errors.push('Collection name already exists! :)');
-        res.render('collection-edit-form', { title: 'Edit Collection Name', collectionId, name, userId, errors, csrfToken: req.csrfToken() });
+        // const collection = db.Collection.build();
+        const collectionName = name;
+        res.render('collection-edit-form', { title: 'Edit Collection Name', collectionName, collectionId, name, userId, errors, csrfToken: req.csrfToken() });
       }
     }
 
