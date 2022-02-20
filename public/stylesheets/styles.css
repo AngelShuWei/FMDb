@@ -36,6 +36,8 @@
 
 }
 
+/* below is to position reviews container on movie.pug */
+
 .review-box{
   padding: 22px;
   margin-left: auto;
