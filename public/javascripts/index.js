@@ -25,8 +25,6 @@ for (let i = 0; i < collectionButtons.length; i++) {
 }
 
 
-
-
 const reviewButtons = document.querySelectorAll('.reviewBtn')
 
 for (let i = 0; i < reviewButtons.length; i++) {
@@ -35,16 +33,16 @@ for (let i = 0; i < reviewButtons.length; i++) {
   reviewButton.addEventListener("click", async (e) => {
     e.preventDefault();
     const reviewString = e.target.id; //review1
-    console.log('review string -----------------', reviewString);
+    // console.log('review string -----------------', reviewString);
 
     const stringId = reviewString.split('-');
-    console.log('stringId-----------------', stringId);
+    // console.log('stringId-----------------', stringId);
 
     const stringId2 = stringId[1]
 
     const id = parseInt(stringId2, 10);
 
-    console.log('review ID -----------------', id);
+    // console.log('review ID -----------------', id);
 
     const res = await fetch(`/reviews/${id}`, {
       method: 'DELETE'
@@ -61,6 +59,31 @@ for (let i = 0; i < reviewButtons.length; i++) {
 
 }
 
+// const editReviewButtons = document.querySelectorAll('editBtnOnReviews');
+
+// for (let i = 0; i < editReviewButtons.length; i++) {
+//   const editReviewButton = editReviewButtons[i]
+
+//   editReviewButton.addEventListener("click", async (e) => {
+//     console.log('BUTTON HAS BEEN CLICKED-------------')
+//     e.preventDefault();
+//     const editReviewString = e.target.id; //review1
+//     // console.log('review string -----------------', reviewString);
+
+//     const stringId = editReviewString.split('-');
+//     console.log('stringId-----------------', stringId);
+
+//     const stringId2 = stringId[1]
+
+//     const id = parseInt(stringId2, 10);
+
+//     console.log('review ID -----------------', id);
+
+//     const res = await fetch(`/reviews/${id}/edit`);
+
+//   });
+
+// }
 
 
 // const deleteBtns = document.querySelectorAll('.delete-btn')
