@@ -4,7 +4,7 @@ include utils.pug
 
 block content
     div(class="review-edit-container")
-        form(action=`/reviews/${reviewId}/edit` method='POST' class="review-edit-form") Movie Review
+        form(action=`/reviews/${reviewId}/edit` method='POST' class="review-edit-form")
             +validationErrorSummary(errors)
             input(type="hidden" name="_csrf" value=csrfToken)
             input(type="hidden" name="movieId" value=pk)
