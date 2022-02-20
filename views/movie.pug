@@ -41,7 +41,7 @@ block content
         each reviewAndUser in reviewsAndUsers
           div.registration-form.review-box
             span(class='reviewInreview-box') #{reviewAndUser[1].username} said:
-            span(class="review-content") "#{reviewAndUser[0].content}"
+              p(class="review-content") "#{reviewAndUser[0].content}"
             div(class="review-star-rating")
               span(class='ratingInreview-box') ★#{reviewAndUser[0].rating}/5
 

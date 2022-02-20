@@ -51,6 +51,10 @@
   color: white;
 }
 
+.ratingInreview-box {
+  color: rgba(245,197,24);
+}
+
 .movie-in-review {
   text-decoration: underline;
 }
@@ -513,15 +517,15 @@ div.create-collection:hover {
   font-size: inherit;
 }
 
-
 .registration-form.review-box {
   display: flex;
-  width: 500px;
-  justify-content: space-around;
+  width: 640px;
+  justify-content: space-between;
 }
 
-
 .review-content {
-  padding-left: 15px;
-  padding-right: 15px;
+  width: 600px;
+  height: auto;
+  word-wrap: break-word;
+
 }
