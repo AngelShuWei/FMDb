@@ -532,7 +532,12 @@ div.create-collection:hover {
 
 }
 
-/* Collections Views */
+/* Collections Stylings */
+.createContainer {
+  display: flex;
+  justify-content: center;
+}
+
 .collection-container {
   width: 800px;
   display: flex;
@@ -543,9 +548,34 @@ div.create-collection:hover {
   border-radius: 10px;
 }
 
+.collection-registration-form {
+  width: 375px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #121212;
+  padding-top: 15px;
+  padding-bottom: 20px;
+  border-radius: 10px;
+}
+
 .collection-list {
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
   justify-content: center;
+}
+
+.collection-edit-container {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+}
+
+.collection-edit-form {
+  background: #121212;
+  padding: 25px;
+  margin-top: 10px;
+  border-radius: 10px;
 }
