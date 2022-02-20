@@ -1,14 +1,17 @@
 extends layout.pug
 
 block content
-    script(src="/javascripts/index.js" type="module")
-    each reviewAndMovie in reviewsAndMovies
-        div(id=`indiv-review-${reviewAndMovie[0].id}` class=`registration-form indiv-review-${reviewAndMovie[0].id} review-box-in-review-list`)
-            a(href=`http://localhost:8080/movies/${reviewAndMovie[1].id}`).movie-in-review
-                div(class='reviewMovieName') #{reviewAndMovie[1].name}
-            div(class='reviewContent') "#{reviewAndMovie[0].content}"
-            div
-                a(href=`http://localhost:8080/reviews/${reviewAndMovie[0].id}/edit`)
-                    button(class='editBtn') Edit
-                button(id=`review-${reviewAndMovie[0].id}`).reviewBtn Delete
-
+    div(id="reviews-container")
+        script(src="/javascripts/index.js" type="module")
+        each reviewAndMovie in reviewsAndMovies
+            div(class="review-container")
+                div(id=`indiv-review-${reviewAndMovie[0].id}` class=`registration-form indiv-review-${reviewAndMovie[0].id} review-box-in-review-list`)
+                    a(href=`http://localhost:8080/movies/${reviewAndMovie[1].id}`).movie-in-review
+                        div(class='reviewMovieName') #{reviewAndMovie[1].name}
+                    div(class='reviewContent') "#{reviewAndMovie[0].content}"
+                    div(class='rev-btn-container')
+                        span(class='rev-edit-btn-container')
+                            a(href=`http://localhost:8080/reviews/${reviewAndMovie[0].id}/edit`)
+                                button(class='rev-edit-btn') Edit
+                        span(class='rev-del-btn-container')
+                            button(class='rev-edit-btn' id=`review-${reviewAndMovie[0].id}`).reviewBtn Delete

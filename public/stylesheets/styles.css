@@ -136,7 +136,6 @@ body {
   margin-bottom: 5px;
 }
 
-
 .container {
   /* width: 100%; */
   padding-right: 15px;
@@ -144,6 +143,11 @@ body {
   margin-right: auto;
   margin-left: auto;
   width: fit-content;
+}
+
+#reviews-container {
+  width: 800px;
+  height: auto;
 }
 
 #nav-logo {
@@ -408,10 +412,11 @@ a.cancel {
   flex-direction: row;
   align-items: center;
   background-color: rgba(128, 128, 128, 0.376);
-  width: 180px;
+  width: 215px;
   padding-left: 15px;
   padding-right: 15px;
   border-radius: 5px;
+  justify-content: center;
 }
 
 .nameContainer {
@@ -438,6 +443,7 @@ div.create-collection {
   padding: 7px;
   border-radius: 5px;
   border: 1px solid rgba(245,197,24);
+  margin-bottom: 25px;
 }
 
 div.create-collection:hover {
@@ -536,4 +542,87 @@ div.create-collection:hover {
   height: auto;
   word-wrap: break-word;
   color: white;
+}
+
+.reviewContent {
+  width: 740px;
+  word-wrap: break-word;
+}
+
+.rev-edit-btn {
+  background-color: white;
+  border-width: 0px;
+  border-style: none;
+  border-radius: 5px;
+  color: black;
+  font-size: 16px;
+}
+.rev-edit-btn {
+  background-color: white;
+  border-width: 0px;
+  border-style: none;
+  border-radius: 5px;
+  color: black;
+  font-size: 16px;
+}
+
+.rev-btn-container {
+  padding-bottom: 15px;
+  padding-top: 10px;
+}
+
+.rev-edit-btn-container {
+  padding-left: 15px;
+}
+
+.rev-del-btn-container {
+ padding-left: 15px;
+}
+
+/* Collections Stylings */
+.createContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.collection-container {
+  width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 25px;
+  border: solid 2px #f5c518;
+  border-radius: 10px;
+}
+
+.collection-registration-form {
+  width: 375px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #121212;
+  padding-top: 15px;
+  padding-bottom: 20px;
+  border-radius: 10px;
+}
+
+.collection-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
+
+.collection-edit-container {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+}
+
+.collection-edit-form {
+  background: #121212;
+  padding: 25px;
+  margin-top: 10px;
+  border-radius: 10px;
 }

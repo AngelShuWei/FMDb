@@ -3,8 +3,8 @@ extends layout.pug
 include utils.pug
 
 block content
-    div Rename your collection below
-        form(action=`/collections/${collectionId}/edit` method='POST')
+    div(class="collection-edit-container") Rename your collection below
+        form(action=`/collections/${collectionId}/edit` method='POST' class="collection-edit-form")
             input(type='hidden' name='_csrf' value=csrfToken)
             input(type='text' name='name' value=collectionName)
             button(type='submit' class='edit-btn') Submit
