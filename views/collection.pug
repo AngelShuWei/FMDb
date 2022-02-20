@@ -4,7 +4,7 @@ block content
   div(class="movie-list")
     each movieObject in movieObjects
       div(class="movie" id=movieObject.id)
-        a(href=`http://localhost:8080/movies/${movieObject.id}`)
+        a(href=`https://fmdb-group-project.herokuapp.com/movies/${movieObject.id}`)
           img(src=movieObject.imageURL, alt=movieObject.name, height="430px", width="300px" id="movie-poster" )
-        a(href=`http://localhost:8080/movies/${movieObject.id}`)
+        a(href=`https://fmdb-group-project.herokuapp.com/movies/${movieObject.id}`)
           p=movieObject.name

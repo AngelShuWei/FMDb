@@ -4,7 +4,7 @@ block content
   div(class="movie-list")
     each movie in movies
       div(class="movie" id=movie.id)
-        a(href=`http://localhost:8080/movies/${movie.id}`)
-          img(src=movie.imageURL, alt=movie.name, height="430px", width="300px" id="movie-poster" onclick="http://localhost:8080/movies/2")
-        a(href=`http://localhost:8080/movies/${movie.id}`)
+        a(href=`https://fmdb-group-project.herokuapp.com/movies/${movie.id}`)
+          img(src=movie.imageURL, alt=movie.name, height="430px", width="300px" id="movie-poster" onclick="https://fmdb-group-project.herokuapp.com/movies/2")
+        a(href=`https://fmdb-group-project.herokuapp.com/movies/${movie.id}`)
           p(class="movie-name")=movie.name

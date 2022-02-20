@@ -4,15 +4,15 @@ block content
   script(src="/javascripts/index.js" type="module")
   div(class="collection-container")
     div(class="create-collection")
-      a(href=`http://localhost:8080/collections/add`) Create New Collection
+      a(href=`https://fmdb-group-project.herokuapp.com/collections/add`) Create New Collection
     div(class="collection-list")
       each collection in collections
         div(id=`container-${collection.id}`).collectionContainer
-          a(href=`http://localhost:8080/collections/${collection.id}`)
+          a(href=`https://fmdb-group-project.herokuapp.com/collections/${collection.id}`)
             p(class="nameContainer") #{collection.name}
           div(id="btnContainer")
             span(class="collection-edit-btn-container")
-              a(href=`http://localhost:8080/collections/${collection.id}/edit`)
+              a(href=`https://fmdb-group-project.herokuapp.com/collections/${collection.id}/edit`)
                   button(class='collection-edit-btn') Edit
-            a(href=`http://localhost:8080/collections/${collection.id}`)
+            a(href=`https://fmdb-group-project.herokuapp.com/collections/${collection.id}`)
                 button(class='collection-del-btn' id=collection.id).collectionId Delete
