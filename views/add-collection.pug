@@ -5,10 +5,10 @@ include utils.pug
 block content
   +validationErrorSummary(errors)
   div(class="createContainer")
-    form(action='/collections/add' method='post' class='registration-form')
+    form(action='/collections/add' method='post' class='collection-registration-form')
       input(type='hidden' name='_csrf' value=csrfToken)
       input(type='hidden' name='userId' value=userId)
-      +field('Collection Name:', 'name', collection.name)
+      +field('Collection Name', 'name', collection.name)
       div
         button(type='submit' class='register' id='register') Create Collection
         a(href='/' class='cancel') Cancel
