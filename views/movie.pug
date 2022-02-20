@@ -27,11 +27,9 @@ block content
           input(type="hidden" name="movieId" value=pk)
           input(type="hidden" name="userId" value=userId)
           textarea(id="reviews-text-area", labelText="Review", name="content", value="review.content", placeholder= "Tell us how you feel about this movie here and share your experience") #{review.content}
-
           div(class="rating-edit-container")
             input(labelText="Rating", name="rating", type="number", min= '1', max='5', value=review.rating, class="rating-input")
             p(class="star-text") /5★
-
           //- input(labelText="Rating", name="rating", type="number", min= '1', max='5', value=review.rating)
           //- +field("Rating", "rating", review.rating, type='number', max='5')
           div(class="registerCancelContainer")
