@@ -11,6 +11,13 @@
   align-content: center;
 }
 
+.alert.alert-danger {
+  width: 400px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .indiv-review {
   margin-bottom: 25px;
 }
