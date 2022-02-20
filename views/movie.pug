@@ -36,13 +36,14 @@ block content
           div(class="registerCancelContainer")
             button(type="submit" class="register" id="registerLog") Add Review
     div
-    p(class='reviewsTitle') Reviews
-      each reviewAndUser in reviewsAndUsers
-        div.registration-form.review-box
-          span(class='reviewInreview-box') #{reviewAndUser[1].username} said:
-          p "#{reviewAndUser[0].content}"
-          span(class='ratingInreview-box') Rating:
-          p #{reviewAndUser[0].rating}/5
+      if reviewsAndUsers
+        p(class='reviewsTitle') Reviews
+          each reviewAndUser in reviewsAndUsers
+            div.registration-form.review-box
+              span(class='reviewInreview-box') #{reviewAndUser[1].username} said:
+              p "#{reviewAndUser[0].content}"
+              span(class='ratingInreview-box') Rating:
+              p #{reviewAndUser[0].rating}/5
 
 
 
