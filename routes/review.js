@@ -71,8 +71,6 @@ const reviewValidators = [
         .exists({checkFalsy: true})
         .withMessage("Reviews can not be empty :)"),
     check('rating')
-        .exists({checkFalsy: true})
-        .withMessage('Please add a rating betweenn 1 - 5 :)')
         .isInt({ min: 0 , max: 10})
         .withMessage('Please provide a rating between 1 - 5 :)'),
 ]
