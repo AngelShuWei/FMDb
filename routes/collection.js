@@ -179,7 +179,7 @@ router.post('/add-movie', csrfProtection, asyncHandler(async (req, res, next) =>
     return next(noCollectionsError(req, res, next));
   } else {
     const {
-      addToCollectionsq
+      addToCollections
     } = req.body;
    // req.body will return csrf and value from the submit i.e. 1#2 in an obj. That's why we need to destructure the obj
 
