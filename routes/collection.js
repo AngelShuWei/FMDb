@@ -212,14 +212,18 @@ router.post('/add-movie', csrfProtection, asyncHandler(async (req, res, next) =>
 router.delete('/:id', async(req, res) => {
   const collectionId = req.params.id
   const collection = await db.Collection.findByPk(collectionId)
-  await db.CollectionMovie.destroy({
-    where:{
-      collectionId
-    }
-  });
-  await collection.destroy();
 
-  res.json({ message: 'Success' })
+  if (collection) {
+    await db.CollectionMovie.destroy({
+      where: {
+        collectionId
+      }
+    });
+    await collection.destroy();
+
+    res.json({ message: 'Success' });
+  };
+
 })
 
 // '/:id(\\d+)'
