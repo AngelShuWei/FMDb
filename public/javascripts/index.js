@@ -58,7 +58,7 @@ for (let i = 0; i < reviewButtons.length; i++) {
 }
 
 
-const movieButtons = document.querySelectorAll('.delMovieBtn')
+const movieButtons = document.querySelectorAll('.delMovieBtn') //queryselectorall picks up all the classes with .delMovieBtn and puts them into an array
 
 for (let i = 0; i < movieButtons.length; i++) {
   const movieButton = movieButtons[i]

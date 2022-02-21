@@ -33,15 +33,15 @@ router.get('/', csrfProtection, asyncHandler( async (req, res, next) => {
 
     if (req.session.auth) {
         const userId = req.session.auth.userId;
-        const reviews = await db.Review.findAll({ where: { userId } });
+        const reviews = await db.Review.findAll({ where: { userId } }); // gives an array with nested objects pertaining to the users reviews
 
-        const reviewsAndMovies = [];
+        const reviewsAndMovies = []; //array
 
         for (let i = 0; i < reviews.length; i++) {
             let review = reviews[i];
-            let movieId = review.movieId;
-            const movie = await db.Movie.findByPk(movieId);
-            reviewsAndMovies.push([review, movie]);
+            let movieId = review.movieId; //returns a movieId
+            const movie = await db.Movie.findByPk(movieId); //returns a specific movie name
+            reviewsAndMovies.push([review, movie]); //reviewAndMovies[0] = the review and reviewAndMovies[1] = the movie name
         }
 
         res.render('review-list', { title: "My Reviews", reviewsAndMovies });

@@ -55,11 +55,13 @@ const collectionValidators = [
   // }),
 ];
 
-const collectionExistsValidators = [
-  check('addToCollections')
-    .exists({ checkFalsy: true })
-    .withMessage('Please create a collection')
-];
+const noCollectionsError = (req, res, next) => {
+  const error = Error("No existing collections");
+  error.status = 404;
+  const message = "You current do not have any collections :)";
+  res.render('error', { error, message });
+};
+
 
 
 router.get('/add', csrfProtection, asyncHandler(async (req, res, next) => {
@@ -161,19 +163,22 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res, next) => {
 
 
 
-router.post('/add-movie', csrfProtection, collectionExistsValidators, asyncHandler(async (req, res, next) => {
+router.post('/add-movie', csrfProtection, asyncHandler(async (req, res, next) => {
 
   if (!req.session.auth) {
     next(notLoggedInError(req, res, next));
   }
 
+  const userId = req.session.auth.userId;
+  const collections = await db.Collection.findAll( {where: userId} );
 
-  const userId = req.session.auth.userId; //finding out that the user is persisting
+  if (!collections) {
+    next(noCollectionsError(req, res, next));
+  }
 
   const {
     addToCollections
   } = req.body;
-  console.log(addToCollections);
  // req.body will return csrf and value from the submit i.e. 1#2 in an obj. That's why we need to destructure the obj
 
 
@@ -192,7 +197,7 @@ router.post('/add-movie', csrfProtection, collectionExistsValidators, asyncHandl
 
   const validatorErrors = validationResult(req);
   const errors = validatorErrors.array().map(error => error.msg);
-  const collections = await db.Collection.findAll({ where: {userId} });
+
 
   console.log("TABLE EXISTS------------------t", tableExists);
 
@@ -241,6 +246,7 @@ router.delete('/:id', async(req, res) => {
 
 router.delete('/:id/movies/:movieId', async(req, res) => { //deleting a singular movie from within a collection
   const movieId = req.params.id;
+  console.log(req.params.id);
   const movie = await db.Movie.findByPk(movieId);
 
   if (movie) {
