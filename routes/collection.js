@@ -22,6 +22,13 @@ const existingCollectionMovie = (req, res, next) => {
   res.render('error', { error, message });
 };
 
+const noCollectionsError = (req, res, next) => {
+  const error = Error("No existing collections");
+  error.status = 404;
+  const message = "You current do not have any collections :)";
+  res.render('error', { error, message });
+};
+
 router.get('/', asyncHandler(async (req, res, next) => {
   if (req.session.auth) {
     const userId = req.session.auth.userId;
@@ -160,9 +167,14 @@ router.post('/add-movie', csrfProtection, asyncHandler(async (req, res, next) =>
   if (!req.session.auth) {
     next(notLoggedInError(req, res, next));
   }
-
-
   const userId = req.session.auth.userId; //finding out that the user is persisting
+
+  //if logged in user currently does not have any collections and clicks the "Add to Collection" button then render error:
+  const collections = await db.Collection.findAll({where: userId});
+
+  if (!collections) {
+    next(noCollectionsError(req, res, next));
+  }
 
   const {
     addToCollections
