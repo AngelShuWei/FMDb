@@ -123,9 +123,12 @@ router.get('/:id', async(req, res) => {
 router.delete('/:id', async (req, res) => {
     const reviewId = req.params.id
     const review = await db.Review.findByPk(reviewId)
-    await review.destroy();
 
-    res.json({ message: 'Success' })
+    if (review) {
+        await review.destroy();
+
+        res.json({ message: 'Success' })
+    }
 });
 
 router.get('/:id(\\d+)/edit', csrfProtection, asyncHandler(async (req, res, next) => {
