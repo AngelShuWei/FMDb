@@ -26,7 +26,7 @@ router.get('/', asyncHandler(async (req, res, next) => {
   res.render('movie-list', { title: 'Movies', movies});
 }));
 
-
+//rendering information in each movies page
 router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res, next) => { //need to include csrfProtection here because this get page includes a form and the form needs to have csrf upon initial loading
   const id = parseInt(req.params.id, 10);
   const movie = await db.Movie.findByPk(id);
@@ -36,10 +36,10 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res, next) => 
     userId = req.session.auth.userId;
   }
 
-  const collections = await db.Collection.findAll({ where: {userId} });
+  const collections = await db.Collection.findAll({ where: {userId} }); //find all collections of user
 
   const review = db.Review.build();
-  const reviews = await db.Review.findAll({where: {movieId: id}});
+  const reviews = await db.Review.findAll({where: {movieId: id}}); // find all reviews for that movie
 
   const reviewsAndUsers = [];
 
@@ -49,8 +49,6 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res, next) => 
     const user = await db.User.findByPk(userId);
     reviewsAndUsers.push([review, user]);
   }
-
-
 
   if (movie) {
     res.render('movie', { title: movie.name, reviewsAndUsers, reviews, review, userId, description: movie.description, director: movie.director, releaseYear: movie.releaseYear, imageURL: movie.imageURL, pk: movie.id, collections, csrfToken: req.csrfToken() });

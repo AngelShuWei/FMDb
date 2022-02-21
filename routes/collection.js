@@ -55,6 +55,12 @@ const collectionValidators = [
   // }),
 ];
 
+const collectionExistsValidators = [
+  check('addToCollections')
+    .exists({ checkFalsy: true })
+    .withMessage('Please create a collection')
+];
+
 
 router.get('/add', csrfProtection, asyncHandler(async (req, res, next) => {
   if (req.session.auth) {
@@ -155,7 +161,7 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res, next) => {
 
 
 
-router.post('/add-movie', csrfProtection, asyncHandler(async (req, res, next) => {
+router.post('/add-movie', csrfProtection, collectionExistsValidators, asyncHandler(async (req, res, next) => {
 
   if (!req.session.auth) {
     next(notLoggedInError(req, res, next));
@@ -167,7 +173,9 @@ router.post('/add-movie', csrfProtection, asyncHandler(async (req, res, next) =>
   const {
     addToCollections
   } = req.body;
+  console.log(addToCollections);
  // req.body will return csrf and value from the submit i.e. 1#2 in an obj. That's why we need to destructure the obj
+
 
   const body = addToCollections.split('#');   //addToCollections is the name of the selection i.e. Romance. It becomes the key to the key value pair
   const collectionIdStr = body[0];
@@ -182,9 +190,13 @@ router.post('/add-movie', csrfProtection, asyncHandler(async (req, res, next) =>
     }
   });
 
+  const validatorErrors = validationResult(req);
+  const errors = validatorErrors.array().map(error => error.msg);
+  const collections = await db.Collection.findAll({ where: {userId} });
+
   console.log("TABLE EXISTS------------------t", tableExists);
 
-  if (tableExists) {
+  if (tableExists) {   //movie already exists in that table
     next(existingCollectionMovie(req, res,next));
     return;
   }
@@ -197,7 +209,8 @@ router.post('/add-movie', csrfProtection, asyncHandler(async (req, res, next) =>
 
     await collectionMovie.save();
     // res.redirect(`/collections/${collectionId}`)
-    res.redirect(`/movies/${movieId}`);
+    // res.redirect(`/movies/${movieId}`);
+    res.render('movie', { title: movie.name, reviewsAndUsers, reviews, review, userId, description: movie.description, director: movie.director, releaseYear: movie.releaseYear, imageURL: movie.imageURL, pk: movie.id, collections, errors, csrfToken: req.csrfToken() });
   };
   // } else {
   //   //TO DO
