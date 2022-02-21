@@ -25,7 +25,7 @@ const existingCollectionMovie = (req, res, next) => {
 const noCollectionsError = (req, res, next) => {
   const error = Error("No existing collections");
   error.status = 404;
-  const message = "You current do not have any collections :)";
+  const message = "You currently do not have any collections :)";
   res.render('error', { error, message });
 };
 
@@ -168,55 +168,52 @@ router.post('/add-movie', csrfProtection, asyncHandler(async (req, res, next) =>
     next(notLoggedInError(req, res, next));
   }
   const userId = req.session.auth.userId; //finding out that the user is persisting
+  console.log("userId---------------------------", userId);
 
   //if logged in user currently does not have any collections and clicks the "Add to Collection" button then render error:
-  const collections = await db.Collection.findAll({where: userId});
+  const collections = await db.Collection.findAll({where: {userId}});
+  // console.log('COLLECITONS------------', collections);
 
-  if (!collections) {
-    next(noCollectionsError(req, res, next));
-  }
+  if (!collections.length) {
+    // console.log('NO COLLECTIONS-----------------');
+    return next(noCollectionsError(req, res, next));
+  } else {
+    const {
+      addToCollectionsq
+    } = req.body;
+   // req.body will return csrf and value from the submit i.e. 1#2 in an obj. That's why we need to destructure the obj
 
-  const {
-    addToCollections
-  } = req.body;
- // req.body will return csrf and value from the submit i.e. 1#2 in an obj. That's why we need to destructure the obj
+    const body = addToCollections.split('#');   //addToCollections is the name of the selection i.e. Romance. It becomes the key to the key value pair
+    const collectionIdStr = body[0];
+    const movieIdStr = body[1];
+    const collectionId = parseInt(collectionIdStr, 10); //since its wrapped in an interpolated string, when we get it from front end (pug), we have to make it back into an integer.
+    const movieId = parseInt(movieIdStr, 10); //^^same logic as above
 
-  const body = addToCollections.split('#');   //addToCollections is the name of the selection i.e. Romance. It becomes the key to the key value pair
-  const collectionIdStr = body[0];
-  const movieIdStr = body[1];
-  const collectionId = parseInt(collectionIdStr, 10); //since its wrapped in an interpolated string, when we get it from front end (pug), we have to make it back into an integer.
-  const movieId = parseInt(movieIdStr, 10); //^^same logic as above
-
-  const tableExists = await db.CollectionMovie.findOne({
-    where: {
-      movieId,
-      collectionId
-    }
-  });
-
-  console.log("TABLE EXISTS------------------t", tableExists);
-
-  if (tableExists) {
-    next(existingCollectionMovie(req, res,next));
-    return;
-  }
-
-  if (!tableExists) {
-    const collectionMovie = db.CollectionMovie.build({
-      movieId,
-      collectionId
+    const tableExists = await db.CollectionMovie.findOne({
+      where: {
+        movieId,
+        collectionId
+      }
     });
 
-    await collectionMovie.save();
-    // res.redirect(`/collections/${collectionId}`)
-    res.redirect(`/movies/${movieId}`);
-  };
-  // } else {
-  //   //TO DO
-  //   //RE RENDER PAGE WITH ERROR BECAUSE JOIN TABLE EXISTS ALREADY
-  //   next(existingCollectionMovie)
-  //   //
-  // }
+    console.log("TABLE EXISTS------------------t", tableExists);
+
+    if (tableExists) {
+      next(existingCollectionMovie(req, res,next));
+      return;
+    }
+
+    if (!tableExists) {
+      const collectionMovie = db.CollectionMovie.build({
+        movieId,
+        collectionId
+      });
+
+      await collectionMovie.save();
+      // res.redirect(`/collections/${collectionId}`)
+      res.redirect(`/movies/${movieId}`);
+    };
+  }
 
 })
 );
