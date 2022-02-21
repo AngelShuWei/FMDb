@@ -6,13 +6,13 @@ block content
         each reviewAndMovie in reviewsAndMovies
             div(class="review-container")
                 div(id=`indiv-review-${reviewAndMovie[0].id}` class=`registration-form indiv-review-${reviewAndMovie[0].id} review-box-in-review-list`)
-                    a(href=`https://fmdb-group-project.herokuapp.com/movies/${reviewAndMovie[1].id}`).movie-in-review
+                    a(href=`/movies/${reviewAndMovie[1].id}`).movie-in-review
                         div(class='reviewMovieName') #{reviewAndMovie[1].name}
                     div(class='reviewContent') "#{reviewAndMovie[0].content}"
                     div(class='reviewContent' id='review-rating-text') Rating: #{reviewAndMovie[0].rating}/5
                     div(class='rev-btn-container')
                         span(class='rev-edit-btn-container')
-                            a(href=`https://fmdb-group-project.herokuapp.com/reviews/${reviewAndMovie[0].id}/edit`)
+                            a(href=`/reviews/${reviewAndMovie[0].id}/edit`)
                                 button(class='rev-edit-btn') Edit
                         span(class='rev-del-btn-container')
                             button(class='rev-edit-btn' id=`review-${reviewAndMovie[0].id}`).reviewBtn Delete
