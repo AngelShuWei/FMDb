@@ -51,7 +51,31 @@ for (let i = 0; i < reviewButtons.length; i++) {
     let success = await res.json()
 
     if (success.message === 'Success') {
-      const container = document.querySelector(`#indiv-review-${id}`)
+      const container = document.querySelector(`indiv-movie-${id}`)
+      container.remove();
+    }
+  });
+}
+
+
+const movieButtons = document.querySelectorAll('.delMovieBtn')
+
+for (let i = 0; i < movieButtons.length; i++) {
+  const movieButton = movieButtons[i]
+
+  movieButton.addEventListener("click", async (e) => {
+    e.preventDefault();
+    const id = e.target.id;
+    console.log('MOVIE ID -----------------', id);
+
+    const res = await fetch(`/collections/${id}/movies/${movieId}`, {
+      method: 'DELETE'
+    });
+
+    let success = await res.json()
+
+    if (success.message === 'Success') {
+      const container = document.querySelector(`#container-${id}`)
       container.remove();
     }
 

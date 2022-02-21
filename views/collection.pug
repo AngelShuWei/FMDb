@@ -8,3 +8,7 @@ block content
           img(src=movieObject.imageURL, alt=movieObject.name, height="430px", width="300px" id="movie-poster" )
         a(href=`https://fmdb-group-project.herokuapp.com/movies/${movieObject.id}`)
           p=movieObject.name
+    div(class="movie-container")
+        div(id=`indiv-movie-${movieObject.id}` class=`registration-form indiv-review-${movieObject.id} review-box-in-review-list`)
+          div(class="del-movie-container")
+            button(class='movie-del-btn' id=`movie-${movieObject.id}`).delMovieBtn Delete

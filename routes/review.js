@@ -125,7 +125,7 @@ router.delete('/:id', async (req, res) => {
     const review = await db.Review.findByPk(reviewId)
 
     if (review) {
-        await review.destroy();
+        await db.Review.destroy();
 
         res.json({ message: 'Success' })
     }

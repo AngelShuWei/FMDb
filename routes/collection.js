@@ -239,6 +239,18 @@ router.delete('/:id', async(req, res) => {
 
 })
 
+router.delete('/:id/movies/:movieId', async(req, res) => { //deleting a singular movie from within a collection
+  const movieId = req.params.id;
+  const movie = await db.Movie.findByPk(movieId);
+
+  if (movie) {
+    await db.Movie.destroy();
+
+    res.json({ message: 'Success' });
+  };
+
+})
+
 // '/:id(\\d+)'
 
 router.get('/:id(\\d+)/edit', csrfProtection, asyncHandler(async (req, res, next) => {
